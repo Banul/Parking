@@ -6,7 +6,7 @@ CREATE SEQUENCE public.driver_seq
   START 1
   CACHE 1;
 ALTER TABLE public.driver_seq
-  OWNER TO postgres;
+  OWNER TO helloworld;
 
 
 CREATE SEQUENCE public.parking_seq
@@ -16,7 +16,7 @@ CREATE SEQUENCE public.parking_seq
   START 1
   CACHE 1;
 ALTER TABLE public.parking_seq
-  OWNER TO postgres;
+  OWNER TO helloworld;
 
   
 CREATE SEQUENCE public.transaction_seq
@@ -26,4 +26,4 @@ CREATE SEQUENCE public.transaction_seq
   START 1
   CACHE 1;
 ALTER TABLE public.transaction_seq
-  OWNER TO postgres;
+  OWNER TO helloworld;

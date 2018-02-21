@@ -1,7 +1,6 @@
 CREATE DATABASE "ToukParking"
-  WITH OWNER = postgres
+  WITH OWNER = helloworld
        ENCODING = 'UTF8'
-       TABLESPACE = pg_default
        LC_COLLATE = 'Polish_Poland.1250'
        LC_CTYPE = 'Polish_Poland.1250'
        CONNECTION LIMIT = -1;

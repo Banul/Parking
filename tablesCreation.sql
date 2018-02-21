@@ -13,7 +13,7 @@ WITH (
   OIDS=FALSE
 );
 ALTER TABLE public.driver
-  OWNER TO postgres;
+  OWNER to helloworld;
 
   
 CREATE TABLE public.parking
@@ -26,7 +26,7 @@ WITH (
   OIDS=FALSE
 );
 ALTER TABLE public.parking
-  OWNER TO postgres;
+  OWNER to helloworld;
 
   
   
