@@ -33,4 +33,27 @@ INSERT INTO driver (first_name, surname, meter_active, meter_last_start_time, vi
 ('Janina', 'Twarda','true', '2018-01-20 19:44:12', 'true');
 
 
+INSERT INTO parking (car_limit) VALUES (120);
+INSERT INTO parking (car_limit) VALUES (220);
+INSERT INTO parking (car_limit) VALUES (80);
+INSERT INTO parking (car_limit) VALUES (90);
+
+
+INSERT INTO transaction (date, parking_id, driver_id, price, transaction_finished) VALUES 
+('2017-12-20 23:15:00', 2, 1, 10, 'true');
+
+INSERT INTO transaction (date, parking_id, driver_id, price, transaction_finished) VALUES 
+('2016-11-20 22:11:10', 3, 1, 12, 'true');
+
+INSERT INTO transaction (date, parking_id, driver_id, price, transaction_finished) VALUES 
+('2017-12-21 23:15:00', 2, 2, 20, 'true');
+
+INSERT INTO transaction (date, parking_id, driver_id, price, transaction_finished) VALUES 
+('2018-01-20 23:15:00', 2, 4, 30, 'false');
+
+INSERT INTO transaction (date, parking_id, driver_id, price, transaction_finished) VALUES 
+('2018-01-20 23:15:00', 1, 9, 18, 'false');
+
+INSERT INTO transaction (date, parking_id, driver_id, price, transaction_finished) VALUES 
+('2018-01-20 23:15:00', 2, 7, 40, 'false');
 
