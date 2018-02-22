@@ -4,11 +4,20 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table (name = "transaction")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+
 public class TransactionModel {
 	
 	@Id
@@ -16,13 +25,20 @@ public class TransactionModel {
 	int id;
 	
 	@Column (name = "date")
-	Date date;
+	String date;
 	
 	@Column (name = "price")
 	double price;
 	
 	@Column (name = "transaction_finished")
 	boolean isTransactionFinished;
+	
+	@ManyToOne (targetEntity=DriverModel.class, fetch=FetchType.LAZY)
+	@JoinColumn(name="driver_id")
+    @JsonManagedReference
+
+	private DriverModel driverModel;
+	
 
 	public int getId() {
 		return id;
@@ -32,11 +48,11 @@ public class TransactionModel {
 		this.id = id;
 	}
 
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 

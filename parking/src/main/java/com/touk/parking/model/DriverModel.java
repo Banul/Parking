@@ -1,14 +1,22 @@
 package com.touk.parking.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Table(name = "driver")
 @Entity
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+
 public class DriverModel {
 
 	@Id
@@ -22,10 +30,10 @@ public class DriverModel {
 	private String surname;
 
 	@Column(name = "meter_last_start_time")
-	private Date meterLastTimeStart;
+	private String meterLastTimeStart;
 
 	@Column(name = "meter_last_stop_time")
-	private Date meterLastTimeStop;
+	private String meterLastTimeStop;
 
 	@Column(name = "vip")
 	private boolean isVip;
@@ -38,6 +46,11 @@ public class DriverModel {
 
 	@Column(name = "vehicle_number")
 	private String vehicleNumber;
+
+	@OneToMany(mappedBy = "driverModel")
+	@JsonBackReference
+
+	private List<TransactionModel> transactionModels;
 
 	public int getId() {
 		return id;
@@ -63,11 +76,11 @@ public class DriverModel {
 		this.surname = surname;
 	}
 
-	public Date getMeterLastTimeStart() {
+	public String getMeterLastTimeStart() {
 		return meterLastTimeStart;
 	}
 
-	public void setMeterLastTimeStart(Date meterLastTimeStart) {
+	public void setMeterLastTimeStart(String meterLastTimeStart) {
 		this.meterLastTimeStart = meterLastTimeStart;
 	}
 
@@ -87,11 +100,11 @@ public class DriverModel {
 		this.isMeterActive = isMeterActive;
 	}
 
-	public Date getMeterLastTimeStop() {
+	public String getMeterLastTimeStop() {
 		return meterLastTimeStop;
 	}
 
-	public void setMeterLastTimeStop(Date meterLastTimeStop) {
+	public void setMeterLastTimeStop(String meterLastTimeStop) {
 		this.meterLastTimeStop = meterLastTimeStop;
 	}
 

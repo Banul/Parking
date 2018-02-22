@@ -36,7 +36,7 @@ ALTER TABLE public.parking
 CREATE TABLE public.transaction
 (
   id integer NOT NULL DEFAULT nextval('transaction_seq'::regclass),
-  date timestamp without time zone,
+  date character varying,
   parking_id integer,
   driver_id integer,
   price double precision,

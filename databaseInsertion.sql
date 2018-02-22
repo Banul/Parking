@@ -39,7 +39,6 @@ INSERT INTO parking (car_limit) VALUES (220);
 INSERT INTO parking (car_limit) VALUES (80);
 INSERT INTO parking (car_limit) VALUES (90);
 
-
 INSERT INTO transaction (date, parking_id, driver_id, price, transaction_finished) VALUES 
 ('2017-12-20 23:15:00', 2, 1, 10, 'true');
 
