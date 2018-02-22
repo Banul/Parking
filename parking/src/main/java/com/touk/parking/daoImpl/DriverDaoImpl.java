@@ -17,6 +17,7 @@ public class DriverDaoImpl implements DriverDao {
 
 	@PersistenceContext
 	EntityManager em;
+	
 
 	public DriverModel getDriverData(int id) {
 

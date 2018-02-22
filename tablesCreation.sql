@@ -7,6 +7,7 @@ CREATE TABLE public.driver
   id integer NOT NULL DEFAULT nextval('driver_seq'::regclass),
   meter_last_start_time timestamp without time zone,
   meter_last_stop_time timestamp without time zone,
+  cost double precision,
   vip boolean,
   CONSTRAINT "Driver_pkey" PRIMARY KEY (id)
 )

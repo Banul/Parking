@@ -28,7 +28,7 @@ public class ParkingModel {
 		return carlimit;
 	}
 
-	public void setCar_limit(int carlimit) {
+	public void setCarlimit(int carlimit) {
 		this.carlimit = carlimit;
 	}
 	

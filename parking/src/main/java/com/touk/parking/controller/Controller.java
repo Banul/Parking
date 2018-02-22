@@ -1,7 +1,6 @@
 package com.touk.parking.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,12 +15,11 @@ public class Controller {
 	@Autowired
 	DriverService driverService;
 
-	@RequestMapping(value = "/test")
-	public DriverModel getDriverService() {
-		System.out.println("aaaaaaaaa");
-	//	return driverService.getDriverData(id);
-		return null;
-
+	@RequestMapping(value = "/{id}")
+	public DriverModel getDriverService(@PathVariable int id) {
+		System.out.println(id);
+		
+		return driverService.getDriverData(id);
 	}
 
 }

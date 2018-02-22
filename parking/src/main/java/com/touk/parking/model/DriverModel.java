@@ -26,14 +26,18 @@ public class DriverModel {
 	@Column (name = "meter_last_start_time")
 	private Date meterLastTimeStart;
 	
+	@Column (name = "meter_last_stop_time")
+	private Date meterLastTimeStop;
+	
 	@Column (name = "vip")
 	private boolean isVip;
 	
 	@Column (name = "meter_active")
 	private boolean isMeterActive;
 	
-	private double cost = 0;
-
+	@Column (name = "cost")
+	private double currentCost;
+	
 	public int getId() {
 		return id;
 	}
@@ -82,13 +86,21 @@ public class DriverModel {
 		this.isMeterActive = isMeterActive;
 	}
 
-	public double getCost() {
-		return cost;
+	public Date getMeterLastTimeStop() {
+		return meterLastTimeStop;
 	}
 
-	public void setCost(double cost) {
-		this.cost = cost;
+	public void setMeterLastTimeStop(Date meterLastTimeStop) {
+		this.meterLastTimeStop = meterLastTimeStop;
 	}
-	
-	
+
+	public double getCurrentCost() {
+		return currentCost;
+	}
+
+	public void setCurrentCost(double currentCost) {
+		this.currentCost = currentCost;
+	}
+
+
 }
