@@ -35,7 +35,8 @@ public class DriverDaoImpl implements DriverDao {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<DriverModel> cq = cb.createQuery(DriverModel.class);
 		Root<DriverModel> driver = cq.from(DriverModel.class);
-		cq.select(driver).where(cb.equal(driver.get("vehicle_number"), vehicleNumber));
+		System.out.println(vehicleNumber);
+		cq.select(driver).where(cb.equal(driver.get("vehicleNumber"), vehicleNumber));
 
 		TypedQuery<DriverModel> q = em.createQuery(cq);
 		DriverModel driverData = q.getSingleResult();

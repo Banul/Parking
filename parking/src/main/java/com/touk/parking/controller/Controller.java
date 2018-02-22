@@ -15,12 +15,12 @@ public class Controller {
 	@Autowired
 	DriverService driverService;
 
-	@RequestMapping(value = "/{id}")
+	@RequestMapping(value = "id/{id}")
 	public DriverModel getDriverDataById(@PathVariable int id) {
 		return driverService.getDriverDataById(id);
 	}
 	
-	@RequestMapping(value = "/{vehicleNumber}")
+	@RequestMapping(value = "vehicleNum/{vehicleNumber}")
 	public DriverModel getDriverDataByVehicleNumber(@PathVariable String vehicleNumber) {
 		return driverService.getDriverDataByVehicleNumber(vehicleNumber);
 		

@@ -7,37 +7,38 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
-
-@Table (name = "driver")
+@Table(name = "driver")
 @Entity
 public class DriverModel {
-	
+
 	@Id
 	@Column(name = "id")
 	private int id;
-	
-	@Column (name = "first_name")
+
+	@Column(name = "first_name")
 	private String name;
-	
-	@Column (name = "surname")
+
+	@Column(name = "surname")
 	private String surname;
-	
-	@Column (name = "meter_last_start_time")
+
+	@Column(name = "meter_last_start_time")
 	private Date meterLastTimeStart;
-	
-	@Column (name = "meter_last_stop_time")
+
+	@Column(name = "meter_last_stop_time")
 	private Date meterLastTimeStop;
-	
-	@Column (name = "vip")
+
+	@Column(name = "vip")
 	private boolean isVip;
-	
-	@Column (name = "meter_active")
+
+	@Column(name = "meter_active")
 	private boolean isMeterActive;
-	
-	@Column (name = "cost")
+
+	@Column(name = "cost")
 	private double currentCost;
-	
+
+	@Column(name = "vehicle_number")
+	private String vehicleNumber;
+
 	public int getId() {
 		return id;
 	}
@@ -102,5 +103,12 @@ public class DriverModel {
 		this.currentCost = currentCost;
 	}
 
+	public String getVehicleNumber() {
+		return vehicleNumber;
+	}
+
+	public void setVehicleNumber(String vehicleNumber) {
+		this.vehicleNumber = vehicleNumber;
+	}
 
 }
