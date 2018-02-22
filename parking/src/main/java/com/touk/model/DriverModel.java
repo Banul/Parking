@@ -8,9 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 
-@Table
+@Table (name = "driver")
 @Entity
-
 public class DriverModel {
 	
 	@Id
@@ -79,8 +78,5 @@ public class DriverModel {
 	public void setMeterActive(boolean isMeterActive) {
 		this.isMeterActive = isMeterActive;
 	}
-	
-	
-	
 	
 }
