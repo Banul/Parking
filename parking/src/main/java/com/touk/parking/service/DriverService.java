@@ -4,6 +4,7 @@ import com.touk.parking.model.DriverModel;
 
 public interface DriverService {
 	
-	public DriverModel getDriverData(int id);
+	public DriverModel getDriverDataById(int id);
+	public DriverModel getDriverDataByVehicleNumber (String vehicleNumber);
 
 }

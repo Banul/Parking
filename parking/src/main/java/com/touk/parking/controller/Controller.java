@@ -16,10 +16,14 @@ public class Controller {
 	DriverService driverService;
 
 	@RequestMapping(value = "/{id}")
-	public DriverModel getDriverData(@PathVariable int id) {
-		System.out.println(id);
+	public DriverModel getDriverDataById(@PathVariable int id) {
+		return driverService.getDriverDataById(id);
+	}
+	
+	@RequestMapping(value = "/{vehicleNumber}")
+	public DriverModel getDriverDataByVehicleNumber(@PathVariable String vehicleNumber) {
+		return driverService.getDriverDataByVehicleNumber(vehicleNumber);
 		
-		return driverService.getDriverData(id);
 	}
 
 }

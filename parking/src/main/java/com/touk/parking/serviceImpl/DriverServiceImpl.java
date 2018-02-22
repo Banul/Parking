@@ -13,8 +13,17 @@ public class DriverServiceImpl implements DriverService {
 	@Autowired
 	DriverDao driverDao;
 
-	public DriverModel getDriverData(int id) {
-		return driverDao.getDriverData(id);
+	public DriverModel getDriverDataByVehicleNumber(String vehicleNumber) {
+		return driverDao.getDriverDataByVehicleNumber(vehicleNumber);
+	}
+
+	public DriverModel getDriverDataById(int id) {
+		return driverDao.getDriverDataById(id);
+	}
+
+	public DriverModel getDriverDataByVehicleId(String vehicleNumber) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
