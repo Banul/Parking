@@ -1,4 +1,4 @@
-package com.touk.model;
+package com.touk.parking.model;
 
 import java.util.Date;
 

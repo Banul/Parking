@@ -1,2 +1,9 @@
 com\touk\model\DriverModel.class
+com\touk\service\DriverService.class
+com\touk\serviceImpl\DriverServiceImpl.class
+com\touk\model\TransactionModel.class
+com\touk\dao\DriverDao.class
+com\touk\daoImpl\DriverDaoImpl.class
+com\touk\controller\Controller.class
+com\touk\model\ParkingModel.class
 com\touk\parking\Application.class
