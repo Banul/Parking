@@ -30,6 +30,8 @@ public class DriverModel {
 	
 	@Column (name = "meter_active")
 	private boolean isMeterActive;
+	
+	private double cost = 0;
 
 	public int getId() {
 		return id;
@@ -78,5 +80,14 @@ public class DriverModel {
 	public void setMeterActive(boolean isMeterActive) {
 		this.isMeterActive = isMeterActive;
 	}
+
+	public double getCost() {
+		return cost;
+	}
+
+	public void setCost(double cost) {
+		this.cost = cost;
+	}
+	
 	
 }
