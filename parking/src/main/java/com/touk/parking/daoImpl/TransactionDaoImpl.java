@@ -1,5 +1,6 @@
 package com.touk.parking.daoImpl;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -13,28 +14,27 @@ import javax.persistence.criteria.Root;
 import org.springframework.stereotype.Repository;
 
 import com.touk.parking.dao.TransactionDao;
-import com.touk.parking.model.DriverModel;
+import com.touk.parking.model.TransactionAggregateModel;
 import com.touk.parking.model.TransactionModel;
 
 @Repository
 public class TransactionDaoImpl implements TransactionDao {
-	
+
 	@PersistenceContext
 	EntityManager em;
 
-	public List <TransactionModel> getTransactionsByDate(String date) {
-		
-		CriteriaBuilder cb = em.getCriteriaBuilder();
-		CriteriaQuery<TransactionModel> cq = cb.createQuery(TransactionModel.class);
-		Root<TransactionModel> driver = cq.from(TransactionModel.class);
-			
-		cq.select(driver).where(cb.equal(driver.get("date"), date));
-		TypedQuery<TransactionModel> q = em.createQuery(cq);
-		List <TransactionModel> transactionData= q.getResultList();
-
-		return transactionData;
-	}
-
-
+	 public List<TransactionModel> getTransactionsByDate(String date) {
+	
+	 CriteriaBuilder cb = em.getCriteriaBuilder();
+	 CriteriaQuery<TransactionModel> cq = cb.createQuery(TransactionModel.class);
+	 Root<TransactionModel> transaction = cq.from(TransactionModel.class);
+	
+	 cq.select(transaction).where(cb.equal(transaction.get("date"), date));
+	 TypedQuery<TransactionModel> q = em.createQuery(cq);
+	 List <TransactionModel> transactionData= q.getResultList();
+	
+	 
+	 return transactionData;
+	 }	
 
 }

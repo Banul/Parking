@@ -16,7 +16,7 @@ public class TransactionServiceImpl implements TransactionService{
 	@Autowired 
 	TransactionDao transactionDao;
 	
-	public List <TransactionModel> getTransactionsByDate(String date) {
+	public List<TransactionModel> getTransactionsByDate(String date) {
 		return transactionDao.getTransactionsByDate(date);
 	}
 
