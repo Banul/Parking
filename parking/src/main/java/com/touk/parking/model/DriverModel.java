@@ -35,9 +35,10 @@ public class DriverModel {
 		
 	}
 	
-	public DriverModel(String timeStart, String timeStop) {
+	public DriverModel(String timeStart, String timeStop, boolean isVip) {
 		this.meterLastTimeStart = timeStart;
 		this.meterLastTimeStop = timeStop;
+		this.isVip = isVip;
 	}
 	
 	@Id
@@ -137,11 +138,11 @@ public class DriverModel {
 		this.vehicleNumber = vehicleNumber;
 	}
 
-	public int getpesel() {
+	public int getPesel() {
 		return pesel;
 	}
 
-	public void setpesel(int pesel) {
+	public void setPesel(int pesel) {
 		this.pesel = pesel;
 	}
 

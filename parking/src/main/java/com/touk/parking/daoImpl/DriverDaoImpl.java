@@ -43,19 +43,18 @@ public class DriverDaoImpl implements DriverDao {
 
 		return driverData;
 	}
-	
+
 	public DriverModel getMeterLastStartAndStopTime(int pesel) {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<DriverModel> cq = cb.createQuery(DriverModel.class);
 		Root<DriverModel> driver = cq.from(DriverModel.class);
-		cq.multiselect(driver.get("meterLastTimeStart"), driver.get("meterLastTimeStop")).where(cb.equal(driver.get("pesel"), pesel));
+		cq.multiselect(driver.get("meterLastTimeStart"), driver.get("meterLastTimeStop"), driver.get("isVip"))
+				.where(cb.equal(driver.get("pesel"), pesel));
 		TypedQuery<DriverModel> q = em.createQuery(cq);
 		DriverModel results = q.getSingleResult();
-		
+
 		return results;
-		
-		
-		
+
 	}
 
 }
