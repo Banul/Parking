@@ -30,7 +30,7 @@ public class DriverServiceImpl implements DriverService {
 		String meterStart = driverModel.getMeterLastTimeStart();
 		String meterStop = driverModel.getMeterLastTimeStop();
 		CostCounter counter = new CostCounter();
-		double cost = counter.countCost(meterStart, meterStop);
+		double cost = counter.getCost(meterStart, meterStop);
 		CostModel costModel = new CostModel(cost);
 		
 		return costModel;
