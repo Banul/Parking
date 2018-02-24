@@ -19,6 +19,18 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 public class DriverModel {
 
+	public DriverModel(int id, String fName, String sName, String meterLastStartTime, String meterLastStopTime, boolean vip, boolean meterActive, double cost, String vehicleNumber){
+		this.id = id;
+		this.name = fName;
+		this.surname = sName;
+		this.meterLastTimeStart = meterLastStartTime;
+		this.meterLastTimeStop = meterLastStopTime;
+		this.isVip = vip;
+		this.isMeterActive = meterActive;
+		this.currentCost = cost;
+		this.vehicleNumber = vehicleNumber;
+	}
+	
 	@Id
 	@Column(name = "id")
 	private int id;
