@@ -15,30 +15,41 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
-@Table (name = "transaction")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@Table(name = "transaction")
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 
 public class TransactionModel {
-	
+
+	public TransactionModel(int id, String date, double price, boolean isTransactionFinished, DriverModel driver) {
+		this.id = id;
+		this.date = date;
+		this.price = price;
+		this.isTransactionFinished = isTransactionFinished;
+		this.driverModel = driver;
+	}
+
+	public TransactionModel() {
+
+	}
+
 	@Id
-	@Column (name = "id")
+	@Column(name = "id")
 	int id;
-	
-	@Column (name = "date")
+
+	@Column(name = "date")
 	String date;
-	
-	@Column (name = "price")
+
+	@Column(name = "price")
 	double price;
-	
-	@Column (name = "transaction_finished")
+
+	@Column(name = "transaction_finished")
 	boolean isTransactionFinished;
-	
-	@ManyToOne (targetEntity=DriverModel.class, fetch=FetchType.LAZY)
-	@JoinColumn(name="driver_id")
-    @JsonManagedReference
+
+	@ManyToOne(targetEntity = DriverModel.class, fetch = FetchType.LAZY)
+	@JoinColumn(name = "driver_id")
+	@JsonManagedReference
 
 	private DriverModel driverModel;
-	
 
 	public int getId() {
 		return id;
@@ -71,6 +82,5 @@ public class TransactionModel {
 	public void setTransactionFinished(boolean isTransactionFinished) {
 		this.isTransactionFinished = isTransactionFinished;
 	}
-	
-	
+
 }

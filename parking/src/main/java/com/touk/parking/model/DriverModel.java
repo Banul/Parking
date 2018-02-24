@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 public class DriverModel {
 
-	public DriverModel(int id, String fName, String sName, String meterLastStartTime, String meterLastStopTime, boolean vip, boolean meterActive, double cost, String vehicleNumber){
+	public DriverModel(int id, String fName, String sName, String meterLastStartTime, String meterLastStopTime, boolean vip, boolean meterActive, double cost, String currency, String vehicleNumber){
 		this.id = id;
 		this.name = fName;
 		this.surname = sName;
@@ -28,6 +28,7 @@ public class DriverModel {
 		this.isVip = vip;
 		this.isMeterActive = meterActive;
 		this.currentCost = cost;
+		this.currency = currency;
 		this.vehicleNumber = vehicleNumber;
 	}
 	

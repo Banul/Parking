@@ -1,9 +1,5 @@
 package com.touk.parking.controller;
 
-import java.util.Arrays;
-import java.util.List;
-
-import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.equalTo;
 
 import org.junit.Test;
@@ -37,20 +33,22 @@ public class DriverControllerTest {
 
 	@Test
 	public void driverTest_CheckingSearchingDriverById() throws Exception {
-		given(service.getDriverDataById(12)).willReturn(createDriverForTest());
+		DriverModel testDriver = createDriverForTest();
+		given(service.getDriverDataById(12)).willReturn(testDriver);
 		runTest("/driver/id/12");
 
 	}
 
 	@Test
 	public void driverTest_CheckigSearchingDriverByVehicleNumber() throws Exception {
-		given(service.getDriverDataByVehicleNumber("ZZZ")).willReturn(createDriverForTest());
+		DriverModel testDriver = createDriverForTest();
+		given(service.getDriverDataByVehicleNumber("ZZZ")).willReturn(testDriver);
 		runTest("/driver/vehicleNum/ZZZ");
 	}
 
 	public DriverModel createDriverForTest() {
 		DriverModel testDriver = new DriverModel(12, "Krzysztof", "Jarzyna", "2018-01-01", "2017-12-30", true, false, 0,
-				"ZZZ");
+				"PLN", "ZZZ");
 		return testDriver;
 
 	}
@@ -63,6 +61,7 @@ public class DriverControllerTest {
 				.andExpect(jsonPath("$.meterLastTimeStop", equalTo("2017-12-30")))
 				.andExpect(jsonPath("$.vip", equalTo(true))).andExpect(jsonPath("$.meterActive", equalTo(false)))
 				.andExpect(jsonPath("$.currentCost", equalTo(0.0)))
+				.andExpect(jsonPath("$.currency",equalTo("PLN")))
 				.andExpect(jsonPath("$.vehicleNumber", equalTo("ZZZ")));
 	}
 
