@@ -48,14 +48,26 @@ public class TransactionControllerTest {
 				0.0, "PLN", "XYZ");
 
 		TransactionModel transaction = new TransactionModel(5, "2010-01-01", 50.5, true, testDriver);
-		List<TransactionModel> allTransactions = Arrays.asList(transaction);
+		List<TransactionModel> transactionList = Arrays.asList(transaction);
 
-		return allTransactions;
+		return transactionList;
 
 	}
 
 	public void runTest(String url) throws Exception {
-		mvc.perform(get(url).contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
+		mvc.perform(get(url).contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+				.andExpect(jsonPath("$[0].id", equalTo(5))).andExpect(jsonPath("$[0].date", equalTo("2010-01-01")))
+				.andExpect(jsonPath("$[0].price", equalTo(50.5)))
+				.andExpect(jsonPath("$[0].driverModel.id", equalTo(10)))
+				.andExpect(jsonPath("$[0].driverModel.name", equalTo("Bożena")))
+				.andExpect(jsonPath("$[0].driverModel.surname", equalTo("Małolepsza")))
+				.andExpect(jsonPath("$[0].driverModel.meterLastTimeStart", equalTo("2018-01-01")))
+				.andExpect(jsonPath("$[0].driverModel.meterLastTimeStop", equalTo("2018-01-02")))
+				.andExpect(jsonPath("$[0].driverModel.currentCost", equalTo(0.0)))
+				.andExpect(jsonPath("$[0].driverModel.currency", equalTo("PLN")))
+				.andExpect(jsonPath("$[0].driverModel.vehicleNumber", equalTo("XYZ")))
+				.andExpect(jsonPath("$[0].driverModel.vip", equalTo(true)))
+				.andExpect(jsonPath("$[0].driverModel.meterActive", equalTo(false)));
 
 	}
 
