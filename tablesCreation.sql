@@ -8,6 +8,7 @@ CREATE TABLE public.driver
   meter_last_start_time timestamp without time zone,
   meter_last_stop_time timestamp without time zone,
   cost double precision,
+  currency character varying,
   vehicle_number character varying, 
   vip boolean,
   CONSTRAINT "Driver_pkey" PRIMARY KEY (id)
@@ -40,6 +41,7 @@ CREATE TABLE public.transaction
   parking_id integer,
   driver_id integer,
   price double precision,
+  currency character varying,
   transaction_finished boolean,
   CONSTRAINT transaction_pkey PRIMARY KEY (id),
   CONSTRAINT driver_fk FOREIGN KEY (driver_id)

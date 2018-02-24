@@ -24,30 +24,33 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
-
-
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebMvcTest(DriverController.class)
 
 public class DriverControllerTest {
-	
-	@Autowired
-    private MockMvc mvc;
-	
-	@MockBean
-    private DriverService service;
-	
-	@Test	
-	public void test() throws Exception {
-		DriverModel bozenka = new DriverModel(12, "Bozenka", "Malolepsza", "2018-01-01", "2017-12-30", true, false, 0, "ZZZ");
-		given(service.getDriverDataById(12)).willReturn(bozenka);
-		
 
-	    mvc.perform(get("/driver/id/12")
-	      .contentType(MediaType.APPLICATION_JSON))
-	      .andExpect(status().isOk());
-		
+	@Autowired
+	private MockMvc mvc;
+
+	@MockBean
+	private DriverService service;
+
+	@Test
+	public void test() throws Exception {
+		DriverModel testDriver = new DriverModel(12, "Krzysztof", "Jarzyna", "2018-01-01", "2017-12-30", true, false, 0, "ZZZ");
+		given(service.getDriverDataById(12)).willReturn(testDriver);
+
+		mvc.perform(get("/driver/id/12")
+				.contentType(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.name", equalTo("Krzysztof")))
+				.andExpect(jsonPath("$.surname", equalTo("Jarzyna")))
+				.andExpect(jsonPath("$.meterLastTimeStart",equalTo("2018-01-01")))
+				.andExpect(jsonPath("$.meterLastTimeStop",equalTo("2017-12-30")))
+				.andExpect(jsonPath("$.vip",equalTo(true)))
+				.andExpect(jsonPath("$.meterActive", equalTo(false)))
+				.andExpect(jsonPath("$.currentCost",equalTo(0.0)))
+				.andExpect(jsonPath("$.vehicleNumber",equalTo("ZZZ")));
 
 	}
 

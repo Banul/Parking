@@ -31,6 +31,10 @@ public class DriverModel {
 		this.vehicleNumber = vehicleNumber;
 	}
 	
+	public DriverModel() {
+		
+	}
+	
 	@Id
 	@Column(name = "id")
 	private int id;
@@ -55,6 +59,9 @@ public class DriverModel {
 
 	@Column(name = "cost")
 	private double currentCost;
+	
+	@Column(name = "currency")
+	private String currency;
 
 	@Column(name = "vehicle_number")
 	private String vehicleNumber;
@@ -135,5 +142,15 @@ public class DriverModel {
 	public void setVehicleNumber(String vehicleNumber) {
 		this.vehicleNumber = vehicleNumber;
 	}
+
+	public String getCurrency() {
+		return currency;
+	}
+
+	public void setCurrency(String currency) {
+		this.currency = currency;
+	}
+	
+	
 
 }
