@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 public class DriverModel {
 
-	public DriverModel(int id, String fName, String sName, String meterLastStartTime, String meterLastStopTime, boolean vip, boolean meterActive, double cost, String currency, String vehicleNumber){
+	public DriverModel(int id, String fName, String sName, String meterLastStartTime, String meterLastStopTime, boolean vip, boolean meterActive, int pesel, String vehicleNumber){
 		this.id = id;
 		this.name = fName;
 		this.surname = sName;
@@ -27,9 +27,8 @@ public class DriverModel {
 		this.meterLastTimeStop = meterLastStopTime;
 		this.isVip = vip;
 		this.isMeterActive = meterActive;
-		this.currentCost = cost;
-		this.currency = currency;
 		this.vehicleNumber = vehicleNumber;
+		this.pesel = pesel;
 	}
 	
 	public DriverModel() {
@@ -58,14 +57,11 @@ public class DriverModel {
 	@Column(name = "meter_active")
 	private boolean isMeterActive;
 
-	@Column(name = "cost")
-	private double currentCost;
-	
-	@Column(name = "currency")
-	private String currency;
-
 	@Column(name = "vehicle_number")
 	private String vehicleNumber;
+	
+	@Column(name = "pesel")
+	private int pesel;
 
 	@OneToMany(mappedBy = "driverModel")
 	@JsonBackReference
@@ -128,14 +124,6 @@ public class DriverModel {
 		this.meterLastTimeStop = meterLastTimeStop;
 	}
 
-	public double getCurrentCost() {
-		return currentCost;
-	}
-
-	public void setCurrentCost(double currentCost) {
-		this.currentCost = currentCost;
-	}
-
 	public String getVehicleNumber() {
 		return vehicleNumber;
 	}
@@ -144,14 +132,14 @@ public class DriverModel {
 		this.vehicleNumber = vehicleNumber;
 	}
 
-	public String getCurrency() {
-		return currency;
+	public int getpesel() {
+		return pesel;
 	}
 
-	public void setCurrency(String currency) {
-		this.currency = currency;
+	public void setpesel(int pesel) {
+		this.pesel = pesel;
 	}
-	
-	
+
+
 
 }

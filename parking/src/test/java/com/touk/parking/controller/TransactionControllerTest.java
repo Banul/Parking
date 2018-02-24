@@ -45,7 +45,7 @@ public class TransactionControllerTest {
 
 	public List<TransactionModel> createTransactionForTest() {
 		DriverModel testDriver = new DriverModel(10, "Bożena", "Małolepsza", "2018-01-01", "2018-01-02", true, false,
-				0.0, "PLN", "XYZ");
+				2222, "XYZ");
 
 		TransactionModel transaction = new TransactionModel(5, "2010-01-01", 50.5, true, testDriver);
 		List<TransactionModel> transactionList = Arrays.asList(transaction);
@@ -63,8 +63,7 @@ public class TransactionControllerTest {
 				.andExpect(jsonPath("$[0].driverModel.surname", equalTo("Małolepsza")))
 				.andExpect(jsonPath("$[0].driverModel.meterLastTimeStart", equalTo("2018-01-01")))
 				.andExpect(jsonPath("$[0].driverModel.meterLastTimeStop", equalTo("2018-01-02")))
-				.andExpect(jsonPath("$[0].driverModel.currentCost", equalTo(0.0)))
-				.andExpect(jsonPath("$[0].driverModel.currency", equalTo("PLN")))
+				.andExpect(jsonPath("$[0].driverModel.pesel", equalTo(2222)))
 				.andExpect(jsonPath("$[0].driverModel.vehicleNumber", equalTo("XYZ")))
 				.andExpect(jsonPath("$[0].driverModel.vip", equalTo(true)))
 				.andExpect(jsonPath("$[0].driverModel.meterActive", equalTo(false)));

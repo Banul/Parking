@@ -47,8 +47,8 @@ public class DriverControllerTest {
 	}
 
 	public DriverModel createDriverForTest() {
-		DriverModel testDriver = new DriverModel(12, "Krzysztof", "Jarzyna", "2018-01-01", "2017-12-30", true, false, 0,
-				"PLN", "ZZZ");
+		DriverModel testDriver = new DriverModel(12, "Krzysztof", "Jarzyna", "2018-01-01", "2017-12-30", true, false, 1111,
+				 "ZZZ");
 		return testDriver;
 
 	}
@@ -60,8 +60,7 @@ public class DriverControllerTest {
 				.andExpect(jsonPath("$.meterLastTimeStart", equalTo("2018-01-01")))
 				.andExpect(jsonPath("$.meterLastTimeStop", equalTo("2017-12-30")))
 				.andExpect(jsonPath("$.vip", equalTo(true))).andExpect(jsonPath("$.meterActive", equalTo(false)))
-				.andExpect(jsonPath("$.currentCost", equalTo(0.0)))
-				.andExpect(jsonPath("$.currency",equalTo("PLN")))
+				.andExpect(jsonPath("$.pesel", equalTo(1111)))
 				.andExpect(jsonPath("$.vehicleNumber", equalTo("ZZZ")));
 	}
 
