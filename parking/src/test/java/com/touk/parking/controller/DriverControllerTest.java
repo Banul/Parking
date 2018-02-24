@@ -36,22 +36,34 @@ public class DriverControllerTest {
 	private DriverService service;
 
 	@Test
-	public void test() throws Exception {
-		DriverModel testDriver = new DriverModel(12, "Krzysztof", "Jarzyna", "2018-01-01", "2017-12-30", true, false, 0, "ZZZ");
-		given(service.getDriverDataById(12)).willReturn(testDriver);
+	public void driverTest_CheckingSearchingDriverById() throws Exception {
+		given(service.getDriverDataById(12)).willReturn(createDriverForTest());
+		runTest("/driver/id/12");
 
-		mvc.perform(get("/driver/id/12")
-				.contentType(MediaType.APPLICATION_JSON))
-				.andExpect(status().isOk())
+	}
+
+	@Test
+	public void driverTest_CheckigSearchingDriverByVehicleNumber() throws Exception {
+		given(service.getDriverDataByVehicleNumber("ZZZ")).willReturn(createDriverForTest());
+		runTest("/driver/vehicleNum/ZZZ");
+	}
+
+	public DriverModel createDriverForTest() {
+		DriverModel testDriver = new DriverModel(12, "Krzysztof", "Jarzyna", "2018-01-01", "2017-12-30", true, false, 0,
+				"ZZZ");
+		return testDriver;
+
+	}
+
+	public void runTest(String url) throws Exception {
+		mvc.perform(get(url).contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
 				.andExpect(jsonPath("$.name", equalTo("Krzysztof")))
 				.andExpect(jsonPath("$.surname", equalTo("Jarzyna")))
-				.andExpect(jsonPath("$.meterLastTimeStart",equalTo("2018-01-01")))
-				.andExpect(jsonPath("$.meterLastTimeStop",equalTo("2017-12-30")))
-				.andExpect(jsonPath("$.vip",equalTo(true)))
-				.andExpect(jsonPath("$.meterActive", equalTo(false)))
-				.andExpect(jsonPath("$.currentCost",equalTo(0.0)))
-				.andExpect(jsonPath("$.vehicleNumber",equalTo("ZZZ")));
-
+				.andExpect(jsonPath("$.meterLastTimeStart", equalTo("2018-01-01")))
+				.andExpect(jsonPath("$.meterLastTimeStop", equalTo("2017-12-30")))
+				.andExpect(jsonPath("$.vip", equalTo(true))).andExpect(jsonPath("$.meterActive", equalTo(false)))
+				.andExpect(jsonPath("$.currentCost", equalTo(0.0)))
+				.andExpect(jsonPath("$.vehicleNumber", equalTo("ZZZ")));
 	}
 
 }
