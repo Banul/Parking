@@ -8,15 +8,24 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table (name = "transaction_aggregate")
+@Table(name = "transaction_aggregate")
 public class TransactionAggregateModel {
-	
-	@Id 
-	@Column (name = "date")
+
+	public TransactionAggregateModel() {
+
+	}
+
+	public TransactionAggregateModel(String date, double totalIncome) {
+		this.date = date;
+		this.totalIncome = totalIncome;
+	}
+
+	@Id
+	@Column(name = "date")
 	String date;
-	
-	@Column (name = "total")
-	double totalEarnings;
+
+	@Column(name = "total")
+	double totalIncome;
 
 	public String getDate() {
 		return date;
@@ -26,15 +35,12 @@ public class TransactionAggregateModel {
 		this.date = date;
 	}
 
-	public double getTotalEarnings() {
-		return totalEarnings;
+	public double getTotalIncome() {
+		return totalIncome;
 	}
 
-	public void setTotalEarnings(double totalEarnings) {
-		this.totalEarnings = totalEarnings;
+	public void setTotalIncome(double totalIncome) {
+		this.totalIncome = totalIncome;
 	}
-	
-
-
 
 }

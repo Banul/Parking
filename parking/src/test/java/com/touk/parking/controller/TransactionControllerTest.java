@@ -36,7 +36,7 @@ public class TransactionControllerTest {
 	private TransactionService service;
 
 	@Test
-	public void transactionTest_CheckingSearchingTransactionByDate() throws Exception {
+	public void transactionTest_SearchingTransactionByDate() throws Exception {
 		List<TransactionModel> testTransaction = createTransactionForTest();
 		given(service.getTransactionsByDate("2010-01-01")).willReturn(testTransaction);
 		runTest("/transaction/2010-01-01");

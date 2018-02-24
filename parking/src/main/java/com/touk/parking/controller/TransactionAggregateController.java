@@ -9,7 +9,7 @@ import com.touk.parking.model.TransactionAggregateModel;
 import com.touk.parking.service.TransactionAggregateService;
 
 @RestController
-@RequestMapping(value = "/transactionTotal")
+@RequestMapping(value = "/transactionAggregate")
 
 public class TransactionAggregateController {
 
