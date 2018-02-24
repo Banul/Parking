@@ -1,11 +1,15 @@
 package com.touk.parking.serviceImpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.touk.parking.dao.DriverDao;
+import com.touk.parking.model.CostModel;
 import com.touk.parking.model.DriverModel;
 import com.touk.parking.service.DriverService;
+import com.touk.parking.utils.CostCounter;
 
 @Service
 public class DriverServiceImpl implements DriverService {
@@ -21,9 +25,16 @@ public class DriverServiceImpl implements DriverService {
 		return driverDao.getDriverDataById(id);
 	}
 
-	public DriverModel getDriverDataByVehicleId(String vehicleNumber) {
-		// TODO Auto-generated method stub
-		return null;
+	public CostModel getCost (int pesel) {
+		DriverModel driverModel = driverDao.getMeterLastStartAndStopTime(pesel);
+		String meterStart = driverModel.getMeterLastTimeStart();
+		String meterStop = driverModel.getMeterLastTimeStop();
+		CostCounter counter = new CostCounter();
+		double cost = counter.countCost(meterStart, meterStop);
+		CostModel costModel = new CostModel(cost);
+		
+		return costModel;
+		
 	}
 
 }

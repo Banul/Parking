@@ -8,5 +8,5 @@ public interface DriverDao {
 
 	public DriverModel getDriverDataById(int id);
 	public DriverModel getDriverDataByVehicleNumber(String vehicleNumber);
-	public List<DriverModel> getMeterLastStartAndStopTime(int id);
+	public DriverModel getMeterLastStartAndStopTime(int pesel);
 }

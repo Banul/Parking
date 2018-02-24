@@ -35,6 +35,11 @@ public class DriverModel {
 		
 	}
 	
+	public DriverModel(String timeStart, String timeStop) {
+		this.meterLastTimeStart = timeStart;
+		this.meterLastTimeStop = timeStop;
+	}
+	
 	@Id
 	@Column(name = "id")
 	private int id;

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.touk.parking.model.CostModel;
 import com.touk.parking.model.DriverModel;
 import com.touk.parking.service.DriverService;
 
@@ -28,6 +29,12 @@ public class DriverController {
 
 		return driverService.getDriverDataByVehicleNumber(vehicleNumber);
 
+	}
+	
+	@RequestMapping(value = "getCost/{pesel}")
+	public CostModel getCost(@PathVariable int pesel) {
+
+		return driverService.getCost(pesel);
 	}
 
 }
