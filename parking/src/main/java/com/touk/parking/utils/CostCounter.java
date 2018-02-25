@@ -20,21 +20,15 @@ public class CostCounter {
 	}
 
 	private int countDifferanceBetweenDates(String dateStart, String dateStop) {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date parsedDateStart = DateConverter.convertDate(dateStart);
+		Date parsedDateEnd = DateConverter.convertDate(dateStop);
+		double milisecondsDiff = ((parsedDateEnd.getTime() - parsedDateStart.getTime()));
+		if (milisecondsDiff > 0)
+			return (int) (milisecondsDiff / MILISECONDS_TO_HOUR) + 1; // parsing to int, so it will round to lower
+																		// number, that's why +1
+		else
+			return 0;
 
-		try {
-			Date parsedDateStart = sdf.parse(dateStart);
-			Date parsedDateEnd = sdf.parse(dateStop);
-			double milisecondsDiff = ((parsedDateEnd.getTime() - parsedDateStart.getTime()));
-			if (milisecondsDiff > 0)
-				return (int) (milisecondsDiff/MILISECONDS_TO_HOUR) + 1; // parsing to int, so it will round to lower number, that's why +1
-			else
-				return 0;
-
-		} catch (ParseException e) {
-			return -1;
-
-		}
 	}
 
 	private double countCost(int differance, boolean isVip) {
@@ -42,12 +36,11 @@ public class CostCounter {
 		if (isVip == false)
 			// sum of geometric series formula
 			cost = (1 - Math.pow(REGULAR_PRICE_FACTOR, differance)) / ((1 - REGULAR_PRICE_FACTOR));
+		else if (differance > 1)
+			cost = VIP_SECOND_HOUR_PRICE * (1 - Math.pow(VIP_PRICE_FACTOR, differance - 1)) / ((1 - VIP_PRICE_FACTOR));
 		else
-			if (differance > 1)
-				cost = VIP_SECOND_HOUR_PRICE * (1 - Math.pow(VIP_PRICE_FACTOR, differance-1)) / ((1 - VIP_PRICE_FACTOR));
-			else 
-				cost = 0;
-		
+			cost = 0;
+
 		return cost;
 	}
 

@@ -7,12 +7,15 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.CriteriaUpdate;
 import javax.persistence.criteria.Root;
+import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
 import com.touk.parking.dao.DriverDao;
 import com.touk.parking.model.DriverModel;
+import com.touk.parking.model.DriverModelUpdateMeterState;
 
 @Repository
 public class DriverDaoImpl implements DriverDao {
@@ -55,6 +58,19 @@ public class DriverDaoImpl implements DriverDao {
 
 		return results;
 
+	}
+
+	@Transactional
+	public void updateDriverData(DriverModelUpdateMeterState driverUpdate, String timeColumnToUpdate) {
+		boolean meterNewStatus = driverUpdate.isMeterActive();
+		
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaUpdate<DriverModel> update = cb.createCriteriaUpdate(DriverModel.class);
+		Root<DriverModel> root = update.from(DriverModel.class);
+		update.set("isMeterActive", meterNewStatus)
+				.set(timeColumnToUpdate, driverUpdate.getDate())
+				.where(cb.equal(root.get("pesel"), driverUpdate.getPesel()));
+		em.createQuery(update).executeUpdate();
 	}
 
 }

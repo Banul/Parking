@@ -1,1 +1,4 @@
+com\touk\parking\controller\TransactionControllerTest.class
 com\touk\parking\controller\DriverControllerTest.class
+com\touk\parking\controller\utils\CostCounterTest.class
+com\touk\parking\controller\TransactionAggregateControllerTest.class
