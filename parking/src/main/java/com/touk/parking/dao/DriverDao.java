@@ -12,3 +12,4 @@ public interface DriverDao {
 	public DriverModel getMeterLastStartAndStopTime(int pesel);
 	public void updateDriverData(DriverModelUpdateMeterState driverUpdate, String timeColumnToUpdate);
 }
+

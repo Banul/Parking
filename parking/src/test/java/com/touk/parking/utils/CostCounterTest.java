@@ -1,4 +1,4 @@
-package com.touk.parking.controller.utils;
+package com.touk.parking.utils;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
