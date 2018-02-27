@@ -5,8 +5,8 @@ import RolesButtonList from './RolesButtonList';
 const App = () => {
     const roles = ['driver', 'parking operator', 'parking owner'];
     
-    const onRoleButtonClicked = () => {
-      console.log("roole");
+    const onRoleButtonClicked = (roleName) => {
+      console.log(roleName);
     }
 
     return (
