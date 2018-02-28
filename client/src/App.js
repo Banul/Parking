@@ -1,23 +1,19 @@
 import React, { Component } from 'react';
 import './App.css';
-import RolesButtonList from './RolesButtonList';
+import Menu from './Menu';
+import { BrowserRouter } from 'react-router-dom';
 
-const App = () => {
-    const roles = ['driver', 'parking operator', 'parking owner'];
-    
-    const onRoleButtonClicked = (roleName) => {
-      console.log(roleName);
-    }
 
+class App extends Component {
+  render() {
     return (
+     <BrowserRouter>
       <div className="App">
-          <h1> Choose Role </h1>
-          <RolesButtonList 
-            roles = {roles}
-            onRoleButtonClicked = {onRoleButtonClicked}/>
-
+        <Menu/>
       </div>
+     </BrowserRouter>
     );
+  }
 }
 
 export default App;
