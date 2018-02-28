@@ -1,8 +1,13 @@
 import React from 'react';
 
 const DataCreatorForParkingOperator = (props) => {
- let divToReturn = <div></div>
-        if (props.currentDriverId !== undefined & props.buttonClicked){
+        let divToReturn = <div></div>;
+
+         if (props.requestStatus !== 200 & props.buttonClicked === true){
+            divToReturn = <div> Connection error </div>
+        }
+
+        else if (props.currentDriverId !== undefined & props.buttonClicked){
             const styleSuccess = {
                margin: "20px",
                color: "#006603"
@@ -22,9 +27,6 @@ const DataCreatorForParkingOperator = (props) => {
             divToReturn = <div style = {styleError}> Driver with entered id does not exist </div>
         }
 
-        else if (props.requestStatus !== 200 & props.buttonClicked){
-            divToReturn = <div> Connection error </div>
-        }
         
         return divToReturn
 

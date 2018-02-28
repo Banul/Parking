@@ -13,7 +13,8 @@ class ParkingOperator extends Component{
         currentDriverId: '',
         parkingMeterStatus: '',
         buttonClicked: false,
-        requestStatus: ''
+        requestStatus: '',
+        currentDriverVehicleNumber: ''
     }
 
     onInputChange = (event) => {
@@ -25,14 +26,9 @@ class ParkingOperator extends Component{
     getData= () => {
         const ID = this.state.inputValueID;
         const URL = `http://localhost:8080/driver/id/${ID}`;
+        let parkingMeterStatus;
         axios.get(URL).then(results =>{
-            const driverId = results.data.id;
-            const vehicleNumber = results.data.vehicleNumber;
-            const meterActive = results.data.meterActive;
-            const requestStatus = results.status;
-            let parkingMeterStatus;
-
-            if (meterActive === false){
+            if (!results.data.meterActive){
                 parkingMeterStatus = "not working";
             }
             else{
@@ -40,12 +36,18 @@ class ParkingOperator extends Component{
             }
 
             this.setState({
-                currentDriverId: driverId,
-                currentDriverVehicleNumber: vehicleNumber,
-                isParkingMeterStarted: meterActive,
+                currentDriverId: results.data.id,
+                currentDriverVehicleNumber: results.data.vehicleNumber,
+                isParkingMeterStarted: results.data.meterActive,
                 parkingMeterStatus: parkingMeterStatus,
                 buttonClicked: true,
-                requestStatus: requestStatus
+                requestStatus: results.status
+            })
+        })
+        .catch(error => {
+            this.setState({
+                requestStatus: 404,
+                buttonClicked: true
             })
         })
     }
@@ -59,14 +61,15 @@ class ParkingOperator extends Component{
             <div>
                 <InputAndButtonComponent role = "parking operator"
                                          onInputChange = {this.onInputChange}
-                                         text = "Check income for a given day"
-                                         onButtonClicked = {this.onButtonClicked}/>
+                                         text = "Get driver by ID"
+                                         onButtonClicked = {this.onButtonClicked}
+                                         />
            
                 <DataCreatorForParkingOperator currentDriverId = {this.state.currentDriverId} 
                                                buttonClicked = {this.state.buttonClicked}
                                                currentDriverId = {this.state.currentDriverId}
                                                requestStatus = {this.state.requestStatus}
-                                               currentDriverVehiclevumber = {this.state.currentDriverVehicleNumber}
+                                               currentDriverVehicleNumber = {this.state.currentDriverVehicleNumber}
                                                parkingMeterStatus = {this.state.parkingMeterStatus} />
                                         
             </div>
