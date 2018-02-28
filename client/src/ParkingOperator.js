@@ -10,9 +10,7 @@ class ParkingOperator extends Component{
         
     state = {
         inputValueID : '',
-        inputValueVehicle : '',
         currentDriverId: '',
-        currentDriverVehicleNumber: '',
         parkingMeterStatus: '',
         buttonClicked: false,
         requestStatus: ''
@@ -53,22 +51,22 @@ class ParkingOperator extends Component{
     }
 
     onButtonClicked = () => {
-        console.log("buttonIdClicked");
         this.getData();
     }
 
     render(){
         return(
             <div>
-                <InputAndButtonComponent role = "driver"
+                <InputAndButtonComponent role = "parking operator"
                                          onInputChange = {this.onInputChange}
+                                         text = "Check income for a given day"
                                          onButtonClicked = {this.onButtonClicked}/>
            
                 <DataCreatorForParkingOperator currentDriverId = {this.state.currentDriverId} 
                                                buttonClicked = {this.state.buttonClicked}
                                                currentDriverId = {this.state.currentDriverId}
                                                requestStatus = {this.state.requestStatus}
-                                               currentDriverVehicleNumber = {this.state.currentDriverVehicleNumber}
+                                               currentDriverVehiclevumber = {this.state.currentDriverVehicleNumber}
                                                parkingMeterStatus = {this.state.parkingMeterStatus} />
                                         
             </div>

@@ -34,6 +34,7 @@ public class DriverController {
 		return driverService.getDriverDataByVehicleNumber(vehicleNumber);
 	}
 
+	@CrossOrigin
 	@RequestMapping(value = "getCost/{pesel}")
 	public CostModel getCost(@PathVariable int pesel) {
 
