@@ -11,8 +11,8 @@ class ParkingOperator extends Component{
         inputValueVehicle : '',
         currentDriverId: '',
         currentDriverVehicleNumber: '',
-        startedParkingMeter: '',
-        requestStatus: ''
+        parkingMeterStatus: '',
+        buttonClicked: false
     }
 
     onInputFindByIDChange = (event) => {
@@ -32,20 +32,24 @@ class ParkingOperator extends Component{
         const URL = `http://localhost:8080/driver/id/${ID}`;
         axios.get(URL).then(results =>{
             console.log(results);
-            const status = results.status;
             const driverId = results.data.id;
             const vehicleNumber = results.data.vehicleNumber;
             const meterActive = results.data.meterActive;
+            let parkingMeterStatus;
+
+            if (meterActive === false){
+                parkingMeterStatus = "not working";
+            }
+            else{
+                parkingMeterStatus = "working"
+            }
+
             this.setState({
                 currentDriverId: driverId,
                 currentDriverVehicleNumber: vehicleNumber,
-                startedParkingMeter: meterActive,
-                requestStatus: status
-            })
-        })
-        .catch(error => {
-            this.setState({
-                requestStatus: 500
+                isParkingMeterStarted: meterActive,
+                parkingMeterStatus: parkingMeterStatus,
+                buttonClicked: true
             })
         })
     }
@@ -55,21 +59,26 @@ class ParkingOperator extends Component{
         this.getDataById();
     }
 
-    onButtonVehicleClicked = () => {
-        console.log("buttonVehicleClicked");
-    }
-
     createInfo = () =>{
         let divToReturn = <div></div>
-        if (this.state.requestStatus === 200){
-            divToReturn =  <div>
+        if (this.state.currentDriverId !== undefined){
+            const styleSuccess = {
+               margin: "20px",
+               color: "#006603"
+             }
+            divToReturn =  <div style = {styleSuccess}> 
                <p> Driver id : {this.state.currentDriverId} </p>
                <p> Driver's vehicle number : {this.state.currentDriverVehicleNumber} </p>
+               <p> Meter status : {this.state.parkingMeterStatus} </p>
 
             </div>
         }
-        else if (this.state.requestStatus === 500){
-            divToReturn = <div> Driver with entered id does not exist </div>
+        else if (this.state.buttonClicked & this.state.currentDriverId === undefined){
+            const styleError = {
+                margin: "20px",
+                color: "#670003"
+            }
+            divToReturn = <div style = {styleError}> Driver with entered id does not exist </div>
         }
        
         return divToReturn
@@ -77,15 +86,13 @@ class ParkingOperator extends Component{
     }
 
     render(){
-        console.log(this.state.requestStatus);
+        console.log(this.state);
         return(
             <div>
-                <div>Chosen role : ParkingOperator</div>
+                <div>Chosen role : Parking operator</div>
                 <input className = "input" onChange = {this.onInputFindByIDChange} />
-                <button type="button" className="button btn btn-success" onClick = {this.onButtonIdClicked}>Search driver by id</button>
+                <button type="button" className="btn btn-info" onClick = {this.onButtonIdClicked}>Search driver by id</button>
                 <p/>
-                <input className = "input" onChange = {this.onInputFindByVehicleNumChange} />
-                <button type = "button" className = "button btn btn-success" onClick = {this.onButtonVehicleClicked}>Search driver by vehicleNumber</button>
                 {this.createInfo()}
             </div>
 

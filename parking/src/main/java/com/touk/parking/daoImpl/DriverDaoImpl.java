@@ -29,9 +29,17 @@ public class DriverDaoImpl implements DriverDao {
 		CriteriaQuery<DriverModel> cq = cb.createQuery(DriverModel.class);
 		Root<DriverModel> driver = cq.from(DriverModel.class);
 		cq.select(driver).where(cb.equal(driver.get("id"), id));
+		DriverModel driverData;
 
 		TypedQuery<DriverModel> q = em.createQuery(cq);
-		DriverModel driverData = q.getSingleResult();
+		try {
+			 driverData = q.getSingleResult();
+		}
+		catch(Exception e) {
+			driverData = null;
+		}
+		
+		System.out.print(driverData);
 
 		return driverData;
 	}
@@ -54,9 +62,16 @@ public class DriverDaoImpl implements DriverDao {
 		cq.multiselect(driver.get("meterLastTimeStart"), driver.get("meterLastTimeStop"), driver.get("isVip"))
 				.where(cb.equal(driver.get("pesel"), pesel));
 		TypedQuery<DriverModel> q = em.createQuery(cq);
-		DriverModel results = q.getSingleResult();
-
+		DriverModel results;
+		try {
+			results = q.getSingleResult();
+		}
+		catch(Exception e) {
+			results = null;
+		}
+	
 		return results;
+		
 
 	}
 
@@ -67,10 +82,15 @@ public class DriverDaoImpl implements DriverDao {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaUpdate<DriverModel> update = cb.createCriteriaUpdate(DriverModel.class);
 		Root<DriverModel> root = update.from(DriverModel.class);
+		try {
 		update.set("isMeterActive", meterNewStatus)
 				.set(timeColumnToUpdate, driverUpdate.getDate())
 				.where(cb.equal(root.get("pesel"), driverUpdate.getPesel()));
 		em.createQuery(update).executeUpdate();
+		}
+		catch(Exception e) {
+			
+		}
 	}
 
 }

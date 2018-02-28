@@ -7,6 +7,7 @@ import com.touk.parking.utils.CurrentDateReturner;
 
 public class DriverModelUpdateMeterState {
 
+
 	private int pesel;
 	private boolean isMeterActive;
 	private Date dateToUpdate = CurrentDateReturner.returnCurrentDate();

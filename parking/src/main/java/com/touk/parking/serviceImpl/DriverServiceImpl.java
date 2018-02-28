@@ -18,7 +18,6 @@ public class DriverServiceImpl implements DriverService {
 	private final String DATABASE_COLUMN_NAME_STOP_TIME = "meterLastTimeStop";
 	private final String DATABASE_COLUMN_NAME_START_TIME = "meterLastTimeStart";
 
-	
 	@Autowired
 	DriverDao driverDao;
 
@@ -32,12 +31,14 @@ public class DriverServiceImpl implements DriverService {
 
 	public void updateDriverDataStopMeter(DriverModelUpdateMeterState driverUpdate) {
 
+		driverUpdate.setMeterActive(false);
 		driverDao.updateDriverData(driverUpdate, DATABASE_COLUMN_NAME_STOP_TIME);
 
 	}
 
 	public void updateDriverDataStartMeter(DriverModelUpdateMeterState driverUpdate) {
 
+		driverUpdate.setMeterActive(true);
 		driverDao.updateDriverData(driverUpdate, DATABASE_COLUMN_NAME_START_TIME);
 	}
 
