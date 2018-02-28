@@ -9,12 +9,12 @@ import ParkingOwner from './ParkingOwner';
 const Menu = () => {
     return(
         <div>
-          <nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
+          <nav className="navbar navbar-inverse">
+  <div className="container-fluid">
+    <div className="navbar-header">
     </div>
-    <ul class="nav navbar-nav">
-      <li><Link to = "/home">Home</Link></li>
+    <ul className="nav navbar-nav">
+      <li><Link to = "/">Home</Link></li>
       <li><Link to="/parkingOperator">Parking operator</Link></li>
       <li><Link to="/parkingOwner">Parking owner</Link></li>
       <li><Link to="/driver">Driver</Link></li>
