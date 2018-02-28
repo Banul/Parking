@@ -12,7 +12,8 @@ class ParkingOperator extends Component{
         currentDriverId: '',
         currentDriverVehicleNumber: '',
         parkingMeterStatus: '',
-        buttonClicked: false
+        buttonClicked: false,
+        requestStatus: ''
     }
 
     onInputFindByIDChange = (event) => {
@@ -35,6 +36,7 @@ class ParkingOperator extends Component{
             const driverId = results.data.id;
             const vehicleNumber = results.data.vehicleNumber;
             const meterActive = results.data.meterActive;
+            const requestStatus = results.status;
             let parkingMeterStatus;
 
             if (meterActive === false){
@@ -49,7 +51,8 @@ class ParkingOperator extends Component{
                 currentDriverVehicleNumber: vehicleNumber,
                 isParkingMeterStarted: meterActive,
                 parkingMeterStatus: parkingMeterStatus,
-                buttonClicked: true
+                buttonClicked: true,
+                requestStatus: requestStatus
             })
         })
     }
@@ -61,7 +64,7 @@ class ParkingOperator extends Component{
 
     createInfo = () =>{
         let divToReturn = <div></div>
-        if (this.state.currentDriverId !== undefined){
+        if (this.state.currentDriverId !== undefined & this.state.buttonClicked){
             const styleSuccess = {
                margin: "20px",
                color: "#006603"
@@ -80,7 +83,11 @@ class ParkingOperator extends Component{
             }
             divToReturn = <div style = {styleError}> Driver with entered id does not exist </div>
         }
-       
+
+        else if (this.state.requestStatus !== 200 & this.state.buttonClicked){
+            divToReturn = <div> Connection error </div>
+        }
+        
         return divToReturn
 
     }
