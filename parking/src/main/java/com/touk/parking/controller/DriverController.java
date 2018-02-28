@@ -21,6 +21,7 @@ public class DriverController {
 	@Autowired
 	DriverService driverService;
 
+	@CrossOrigin
 	@RequestMapping(value = "id/{id}")
 	public DriverModel getDriverDataById(@PathVariable int id) {
 
