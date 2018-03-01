@@ -4,7 +4,9 @@ import DataCreatorForParkingOperator from './DataCreatorForParkingOperator';
 import './input.css';
 import './button.css';
 import axios from 'axios';
-
+import driverAndParkingOperatorValidation from './driverAndParkingOperatorValidation';
+import { MAX_INPUT_LENGTH_PARKING_OPERATOR, PARKING_OPERATOR_ROLE_CODE } from './ConstansClass';
+import ValidationWarningReturner from './ValidationWarningReturner';
 
 class ParkingOperator extends Component{
         
@@ -14,12 +16,14 @@ class ParkingOperator extends Component{
         parkingMeterStatus: '',
         buttonClicked: false,
         requestStatus: '',
-        currentDriverVehicleNumber: ''
+        currentDriverVehicleNumber: '',
+        parkingOperatorValidationStatus: ''
     }
 
     onInputChange = (event) => {
         this.setState({
-            inputValueID: event.target.value
+            inputValueID: event.target.value,
+            parkingOperatorValidationStatus: true
         });
     }
 
@@ -53,18 +57,27 @@ class ParkingOperator extends Component{
     }
 
     onButtonClicked = () => {
-        this.getData();
+        const validationStatus = driverAndParkingOperatorValidation(this.state.inputValueID, MAX_INPUT_LENGTH_PARKING_OPERATOR, PARKING_OPERATOR_ROLE_CODE);
+        if (validationStatus === true){
+            this.getData();
+        }
+        else{
+            this.setState({
+                parkingOperatorValidationStatus: false,
+            })
+        }
     }
 
     render(){
         return(
             <div>
-                <InputAndButtonComponent role = "parking operator"
+                <InputAndButtonComponent role = {PARKING_OPERATOR_ROLE_CODE}
                                          onInputChange = {this.onInputChange}
                                          text = "Get driver by ID"
                                          onButtonClicked = {this.onButtonClicked}
                                          />
-           
+                <ValidationWarningReturner validationStatus = {this.state.parkingOperatorValidationStatus}/>
+
                 <DataCreatorForParkingOperator currentDriverId = {this.state.currentDriverId} 
                                                buttonClicked = {this.state.buttonClicked}
                                                requestStatus = {this.state.requestStatus}

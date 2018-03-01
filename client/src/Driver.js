@@ -2,8 +2,10 @@ import React, {Component} from 'react';
 import InputAndButtonComponent from './InputAndButtonComponent';
 import DataCreatorForDriver from './DataCreatorForDriver';
 import axios from 'axios';
-import driverValidation from './driverValidation';
+import driverAndParkingOperatorValidation from './driverAndParkingOperatorValidation';
 import ValidationWarningReturner from './ValidationWarningReturner';
+import { MAX_INPUT_LENGTH_DRIVER, DRIVER_ROLE_CODE } from './ConstansClass';
+
 
 class Driver extends Component{
 
@@ -15,7 +17,7 @@ class Driver extends Component{
         currentlyShownPesel: '',
         isMeterActive: '',
         putStatus: '',
-        showDataAboutCurrentMeterStatus: true,
+        showDataAboutCurrentMeterStatus: false,
         showDataAboutSuccessfullPut: false,
         driverValidationStatus: ''
     }
@@ -29,7 +31,7 @@ class Driver extends Component{
     }
 
     onButtonClicked = () => {
-        const validationStatus = driverValidation(this.state.inputPeselValue);
+        const validationStatus = driverAndParkingOperatorValidation(this.state.inputPeselValue, MAX_INPUT_LENGTH_DRIVER, DRIVER_ROLE_CODE);
         if (validationStatus === true){
             this.getData();
         }
@@ -88,7 +90,7 @@ class Driver extends Component{
    render(){
         return(
             <div>
-             <InputAndButtonComponent role = "driver"
+             <InputAndButtonComponent role = {DRIVER_ROLE_CODE}
                                          onInputChange = {this.onInputChange}
                                          text = "Get cost by PESEL"
                                          onButtonClicked = {this.onButtonClicked}
