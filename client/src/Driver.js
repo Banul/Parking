@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import InputAndButtonComponent from './InputAndButtonComponent';
 import DataCreatorForDriver from './DataCreatorForDriver';
 import axios from 'axios';
+import driverValidation from './driverValidation';
+import ValidationWarningReturner from './ValidationWarningReturner';
 
 class Driver extends Component{
 
@@ -13,17 +15,30 @@ class Driver extends Component{
         currentlyShownPesel: '',
         isMeterActive: '',
         putStatus: '',
-        showDataAboutCurrentMeterStatus: true
+        showDataAboutCurrentMeterStatus: true,
+        showDataAboutSuccessfullPut: false,
+        driverValidationStatus: ''
     }
 
     onInputChange = (event) => {
         this.setState({
-            inputPeselValue: event.target.value
+            inputPeselValue: event.target.value,
+            driverValidationStatus: true,
+            showDataAboutSuccessfullPut: false
         });
     }
 
     onButtonClicked = () => {
-        this.getData();
+        const validationStatus = driverValidation(this.state.inputPeselValue);
+        if (validationStatus === true){
+            this.getData();
+        }
+        else{
+            this.setState({
+                driverValidationStatus: false,
+                showDataAboutCurrentMeterStatus: false
+            })
+        }
     }
 
     getData = () => {
@@ -57,13 +72,15 @@ class Driver extends Component{
             .then(results => {
                 this.setState({
                     putStatus: results.status,
-                    showDataAboutCurrentMeterStatus: false
+                    showDataAboutCurrentMeterStatus: false,
+                    showDataAboutSuccessfullPut: true
                 })
             })
             .catch(error => {
                 this.setState({
                     putStatus: 404,
-                    showDataAboutCurrentMeterStatus: false
+                    showDataAboutCurrentMeterStatus: false,
+                    showDataAboutSuccessfullPut: false
                 })
             })
     }
@@ -76,6 +93,7 @@ class Driver extends Component{
                                          text = "Get cost by PESEL"
                                          onButtonClicked = {this.onButtonClicked}
                                          />
+            <ValidationWarningReturner validationStatus = {this.state.driverValidationStatus}/>
              <DataCreatorForDriver requestStatus = {this.state.getStatus}
                                    price = {this.state.cost}
                                    buttonClicked = {this.state.buttonClicked}
@@ -84,6 +102,8 @@ class Driver extends Component{
                                    onMeterButtonClicked = {(action) => this.onMeterButtonClicked(action)}
                                    putStatus = {this.state.putStatus}
                                    showDataAboutCurrentMeterStatus = {this.state.showDataAboutCurrentMeterStatus}
+                                   driverValidation = {this.state.driverValidationStatus}
+                                   showDataAboutSuccessfullPut = {this.state.showDataAboutSuccessfullPut}
              />  
             </div>                         
         )

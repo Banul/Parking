@@ -14,8 +14,8 @@ const styleError = {
 const DataCreatorForDriver = (props) => {
 
     let divToReturn = <div></div>;
-      
-    if (props.price !== undefined & props.buttonClicked & props.showDataAboutCurrentMeterStatus){            
+
+    if (props.price !== '' & props.price !== undefined & props.buttonClicked & props.showDataAboutCurrentMeterStatus){            
             let informationAboutMeterStatus;
 
             if (props.isMeterActive === false){
@@ -44,12 +44,11 @@ const DataCreatorForDriver = (props) => {
             divToReturn = <div style = {styleError}> Driver with entered PESEL does not exist </div>
         }
 
-    else if (props.putStatus === 200  & !props.showDataAboutCurrentMeterStatus){
-            console.log("asudasiu");
-            divToReturn = <div style = {styleSuccess}> Data sucesfully put </div> 
+    else if (props.putStatus === 200  & props.showDataAboutSuccessfullPut === true){
+            divToReturn = <div style = {styleSuccess}> Data sucessfully put </div> 
         }
 
-    else if (props.putStatus === 404 & !props.showDataAboutCurrentMeterStatus){
+    else if (props.putStatus === 404 & !props.showDataAboutSuccessfullPut){
             divToReturn = <div style = {styleError}> Error while putting data </div>
         }
 
