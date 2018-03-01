@@ -67,7 +67,6 @@ class ParkingOperator extends Component{
            
                 <DataCreatorForParkingOperator currentDriverId = {this.state.currentDriverId} 
                                                buttonClicked = {this.state.buttonClicked}
-                                               currentDriverId = {this.state.currentDriverId}
                                                requestStatus = {this.state.requestStatus}
                                                currentDriverVehicleNumber = {this.state.currentDriverVehicleNumber}
                                                parkingMeterStatus = {this.state.parkingMeterStatus} />
