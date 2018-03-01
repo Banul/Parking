@@ -17,9 +17,9 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Entity
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 
-public class DriverModel {
+public class FullDriverModel {
 
-	public DriverModel(int id, String fName, String sName, String meterLastStartTime, String meterLastStopTime, boolean vip, boolean meterActive, int pesel, String vehicleNumber){
+	public FullDriverModel(int id, String fName, String sName, String meterLastStartTime, String meterLastStopTime, boolean vip, boolean meterActive, int pesel, String vehicleNumber){
 		this.id = id;
 		this.name = fName;
 		this.surname = sName;
@@ -31,14 +31,15 @@ public class DriverModel {
 		this.pesel = pesel;
 	}
 	
-	public DriverModel() {
+	public FullDriverModel() {
 		
 	}
 	
-	public DriverModel(String timeStart, String timeStop, boolean isVip) {
+	public FullDriverModel(String timeStart, String timeStop, boolean isVip, boolean isMeterActive) {
 		this.meterLastTimeStart = timeStart;
 		this.meterLastTimeStop = timeStop;
 		this.isVip = isVip;
+		this.isMeterActive = isMeterActive;
 	}
 	
 	@Id
@@ -69,7 +70,7 @@ public class DriverModel {
 	@Column(name = "pesel")
 	private int pesel;
 
-	@OneToMany(mappedBy = "driverModel")
+	@OneToMany(mappedBy = "fullDriverModel")
 	@JsonBackReference
 
 	private List<TransactionModel> transactionModels;

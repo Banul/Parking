@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.touk.parking.model.CostModel;
-import com.touk.parking.model.DriverModel;
+import com.touk.parking.model.CostDriverModel;
 import com.touk.parking.model.DriverModelUpdateMeterState;
+import com.touk.parking.model.FullDriverModel;
 import com.touk.parking.service.DriverService;
 
 @RestController
@@ -23,22 +23,16 @@ public class DriverController {
 
 	@CrossOrigin
 	@RequestMapping(value = "id/{id}")
-	public DriverModel getDriverDataById(@PathVariable int id) {
+	public FullDriverModel getDriverDataById(@PathVariable int id) {
 
 		return driverService.getDriverDataById(id);
 	}
 
-	@RequestMapping(value = "vehicleNum/{vehicleNumber}")
-	public DriverModel getDriverDataByVehicleNumber(@PathVariable String vehicleNumber) {
-
-		return driverService.getDriverDataByVehicleNumber(vehicleNumber);
-	}
-
 	@CrossOrigin
 	@RequestMapping(value = "getCost/{pesel}")
-	public CostModel getCost(@PathVariable int pesel) {
+	public CostDriverModel getCost(@PathVariable int pesel) {
 
-		return driverService.getCost(pesel);
+		return driverService.createModelForDriver(pesel);
 	}
 
 	@PutMapping(value = "updateDriverStopMeter", consumes = MediaType.APPLICATION_JSON_VALUE)

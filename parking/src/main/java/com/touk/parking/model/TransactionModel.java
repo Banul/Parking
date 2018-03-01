@@ -10,7 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -20,12 +19,12 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 public class TransactionModel {
 
-	public TransactionModel(int id, String date, double price, boolean isTransactionFinished, DriverModel driver) {
+	public TransactionModel(int id, String date, double price, boolean isTransactionFinished, FullDriverModel driver) {
 		this.id = id;
 		this.date = date;
 		this.price = price;
 		this.isTransactionFinished = isTransactionFinished;
-		this.driverModel = driver;
+		this.fullDriverModel = driver;
 	}
 
 	public TransactionModel() {
@@ -45,11 +44,11 @@ public class TransactionModel {
 	@Column(name = "transaction_finished")
 	boolean isTransactionFinished;
 
-	@ManyToOne(targetEntity = DriverModel.class, fetch = FetchType.LAZY)
+	@ManyToOne(targetEntity = FullDriverModel.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "driver_id")
 	@JsonManagedReference
 
-	private DriverModel driverModel;
+	private FullDriverModel fullDriverModel;
 
 	public int getId() {
 		return id;

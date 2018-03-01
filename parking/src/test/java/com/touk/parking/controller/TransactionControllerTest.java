@@ -20,7 +20,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.touk.parking.model.DriverModel;
+import com.touk.parking.model.FullDriverModel;
 import com.touk.parking.model.TransactionModel;
 import com.touk.parking.service.TransactionService;
 
@@ -44,7 +44,7 @@ public class TransactionControllerTest {
 	}
 
 	public List<TransactionModel> createTransactionForTest() {
-		DriverModel testDriver = new DriverModel(10, "Bożena", "Małolepsza", "2018-01-01", "2018-01-02", true, false,
+		FullDriverModel testDriver = new FullDriverModel(10, "Bożena", "Małolepsza", "2018-01-01", "2018-01-02", true, false,
 				2222, "XYZ");
 
 		TransactionModel transaction = new TransactionModel(5, "2010-01-01", 50.5, true, testDriver);

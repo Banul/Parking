@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.touk.parking.dao.DriverDao;
-import com.touk.parking.model.CostModel;
-import com.touk.parking.model.DriverModel;
+import com.touk.parking.model.CostDriverModel;
 import com.touk.parking.model.DriverModelUpdateMeterState;
+import com.touk.parking.model.FullDriverModel;
 import com.touk.parking.service.DriverService;
 import com.touk.parking.utils.CostCounter;
 
@@ -21,11 +21,7 @@ public class DriverServiceImpl implements DriverService {
 	@Autowired
 	DriverDao driverDao;
 
-	public DriverModel getDriverDataByVehicleNumber(String vehicleNumber) {
-		return driverDao.getDriverDataByVehicleNumber(vehicleNumber);
-	}
-
-	public DriverModel getDriverDataById(int id) {
+	public FullDriverModel getDriverDataById(int id) {
 		return driverDao.getDriverDataById(id);
 	}
 
@@ -42,16 +38,17 @@ public class DriverServiceImpl implements DriverService {
 		driverDao.updateDriverData(driverUpdate, DATABASE_COLUMN_NAME_START_TIME);
 	}
 
-	public CostModel getCost(int pesel) {
-		DriverModel driverModel = driverDao.getMeterLastStartAndStopTime(pesel);
+	public CostDriverModel createModelForDriver(int pesel) {
+		FullDriverModel driverModel = driverDao.getMeterLastStartAndStopTime(pesel);
+		boolean isMeterActive = driverModel.isMeterActive();
 		String meterStart = driverModel.getMeterLastTimeStart();
 		String meterStop = driverModel.getMeterLastTimeStop();
 		boolean isVip = driverModel.isVip();
 		CostCounter counter = new CostCounter();
 		double cost = counter.getCost(meterStart, meterStop, isVip);
-		CostModel costModel = new CostModel(cost);
+		CostDriverModel costDriverModel = new CostDriverModel(cost, isMeterActive);
 
-		return costModel;
+		return costDriverModel;
 	}
 
 }

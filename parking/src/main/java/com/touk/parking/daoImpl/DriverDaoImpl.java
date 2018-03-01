@@ -14,8 +14,8 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import com.touk.parking.dao.DriverDao;
-import com.touk.parking.model.DriverModel;
 import com.touk.parking.model.DriverModelUpdateMeterState;
+import com.touk.parking.model.FullDriverModel;
 
 @Repository
 public class DriverDaoImpl implements DriverDao {
@@ -23,73 +23,57 @@ public class DriverDaoImpl implements DriverDao {
 	@PersistenceContext
 	EntityManager em;
 
-	public DriverModel getDriverDataById(int id) {
+	public FullDriverModel getDriverDataById(int id) {
 
 		CriteriaBuilder cb = em.getCriteriaBuilder();
-		CriteriaQuery<DriverModel> cq = cb.createQuery(DriverModel.class);
-		Root<DriverModel> driver = cq.from(DriverModel.class);
+		CriteriaQuery<FullDriverModel> cq = cb.createQuery(FullDriverModel.class);
+		Root<FullDriverModel> driver = cq.from(FullDriverModel.class);
 		cq.select(driver).where(cb.equal(driver.get("id"), id));
-		DriverModel driverData;
+		FullDriverModel driverData;
 
-		TypedQuery<DriverModel> q = em.createQuery(cq);
+		TypedQuery<FullDriverModel> q = em.createQuery(cq);
 		try {
-			 driverData = q.getSingleResult();
-		}
-		catch(Exception e) {
+			driverData = q.getSingleResult();
+		} catch (Exception e) {
 			driverData = null;
 		}
-		
+
 		System.out.print(driverData);
 
 		return driverData;
 	}
 
-	public DriverModel getDriverDataByVehicleNumber(String vehicleNumber) {
+	public FullDriverModel getMeterLastStartAndStopTime(int pesel) {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
-		CriteriaQuery<DriverModel> cq = cb.createQuery(DriverModel.class);
-		Root<DriverModel> driver = cq.from(DriverModel.class);
-		cq.select(driver).where(cb.equal(driver.get("vehicleNumber"), vehicleNumber));
-		TypedQuery<DriverModel> q = em.createQuery(cq);
-		DriverModel driverData = q.getSingleResult();
-
-		return driverData;
-	}
-
-	public DriverModel getMeterLastStartAndStopTime(int pesel) {
-		CriteriaBuilder cb = em.getCriteriaBuilder();
-		CriteriaQuery<DriverModel> cq = cb.createQuery(DriverModel.class);
-		Root<DriverModel> driver = cq.from(DriverModel.class);
-		cq.multiselect(driver.get("meterLastTimeStart"), driver.get("meterLastTimeStop"), driver.get("isVip"))
-				.where(cb.equal(driver.get("pesel"), pesel));
-		TypedQuery<DriverModel> q = em.createQuery(cq);
-		DriverModel results;
+		CriteriaQuery<FullDriverModel> cq = cb.createQuery(FullDriverModel.class);
+		Root<FullDriverModel> driver = cq.from(FullDriverModel.class);
+		cq.multiselect(driver.get("meterLastTimeStart"), driver.get("meterLastTimeStop"), driver.get("isVip"),
+				driver.get("isMeterActive")).where(cb.equal(driver.get("pesel"), pesel));
+		TypedQuery<FullDriverModel> q = em.createQuery(cq);
+		FullDriverModel results;
 		try {
 			results = q.getSingleResult();
-		}
-		catch(Exception e) {
+		} catch (Exception e) {
 			results = null;
 		}
-	
+
 		return results;
-		
 
 	}
 
 	@Transactional
 	public void updateDriverData(DriverModelUpdateMeterState driverUpdate, String timeColumnToUpdate) {
 		boolean meterNewStatus = driverUpdate.isMeterActive();
-		
+
 		CriteriaBuilder cb = em.getCriteriaBuilder();
-		CriteriaUpdate<DriverModel> update = cb.createCriteriaUpdate(DriverModel.class);
-		Root<DriverModel> root = update.from(DriverModel.class);
+		CriteriaUpdate<FullDriverModel> update = cb.createCriteriaUpdate(FullDriverModel.class);
+		Root<FullDriverModel> root = update.from(FullDriverModel.class);
 		try {
-		update.set("isMeterActive", meterNewStatus)
-				.set(timeColumnToUpdate, driverUpdate.getDate())
-				.where(cb.equal(root.get("pesel"), driverUpdate.getPesel()));
-		em.createQuery(update).executeUpdate();
-		}
-		catch(Exception e) {
-			
+			update.set("isMeterActive", meterNewStatus).set(timeColumnToUpdate, driverUpdate.getDate())
+					.where(cb.equal(root.get("pesel"), driverUpdate.getPesel()));
+			em.createQuery(update).executeUpdate();
+		} catch (Exception e) {
+
 		}
 	}
 

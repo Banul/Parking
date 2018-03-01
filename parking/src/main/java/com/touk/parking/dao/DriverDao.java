@@ -2,14 +2,13 @@ package com.touk.parking.dao;
 
 import java.util.List;
 
-import com.touk.parking.model.DriverModel;
 import com.touk.parking.model.DriverModelUpdateMeterState;
+import com.touk.parking.model.FullDriverModel;
 
 public interface DriverDao {
 
-	public DriverModel getDriverDataById(int id);
-	public DriverModel getDriverDataByVehicleNumber(String vehicleNumber);
-	public DriverModel getMeterLastStartAndStopTime(int pesel);
+	public FullDriverModel getDriverDataById(int id);
+	public FullDriverModel getMeterLastStartAndStopTime(int pesel);
 	public void updateDriverData(DriverModelUpdateMeterState driverUpdate, String timeColumnToUpdate);
 }
 

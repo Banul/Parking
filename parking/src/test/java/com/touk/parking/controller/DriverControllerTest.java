@@ -11,7 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.touk.parking.model.DriverModel;
+import com.touk.parking.model.FullDriverModel;
 import com.touk.parking.service.DriverService;
 import static org.mockito.BDDMockito.*;
 
@@ -33,21 +33,15 @@ public class DriverControllerTest {
 
 	@Test
 	public void driverTest_CheckingSearchingDriverById() throws Exception {
-		DriverModel testDriver = createDriverForTest();
+		FullDriverModel testDriver = createDriverForTest();
 		given(service.getDriverDataById(12)).willReturn(testDriver);
 		runTest("/driver/id/12");
 
 	}
 
-	@Test
-	public void driverTest_CheckigSearchingDriverByVehicleNumber() throws Exception {
-		DriverModel testDriver = createDriverForTest();
-		given(service.getDriverDataByVehicleNumber("ZZZ")).willReturn(testDriver);
-		runTest("/driver/vehicleNum/ZZZ");
-	}
 
-	public DriverModel createDriverForTest() {
-		DriverModel testDriver = new DriverModel(12, "Krzysztof", "Jarzyna", "2018-01-01", "2017-12-30", true, false, 1111,
+	public FullDriverModel createDriverForTest() {
+		FullDriverModel testDriver = new FullDriverModel(12, "Krzysztof", "Jarzyna", "2018-01-01", "2017-12-30", true, false, 1111,
 				 "ZZZ");
 		return testDriver;
 
