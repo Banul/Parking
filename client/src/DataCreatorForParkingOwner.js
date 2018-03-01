@@ -1,4 +1,5 @@
 import React from "react";
+import './errorAndSuccesStyles.css';
 
 const DataCreatorForParkingOwner = (props) => {
     let divToReturn = <div> </div>;
@@ -8,11 +9,8 @@ const DataCreatorForParkingOwner = (props) => {
     }
 
    else if (props.checkedDate !== undefined & props.buttonClicked){
-            const styleSuccess = {
-               margin: "20px",
-               color: "#006603"
-             }
-        divToReturn = <div style = {styleSuccess}>
+
+        divToReturn = <div className = "styleSuccess">
                 <p> Checked date: {props.checkedDate} </p>
                 <p> Total income: {props.income} </p>
             </div>

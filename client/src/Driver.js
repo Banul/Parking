@@ -4,7 +4,9 @@ import DataCreatorForDriver from './DataCreatorForDriver';
 import axios from 'axios';
 import driverAndParkingOperatorValidation from './driverAndParkingOperatorValidation';
 import ValidationWarningReturner from './ValidationWarningReturner';
-import { MAX_INPUT_LENGTH_DRIVER, DRIVER_ROLE_CODE } from './ConstansClass';
+import { MAX_INPUT_LENGTH_DRIVER, DRIVER_ROLE_CODE } from './ConstansClassValues';
+import { GET_COST, UPDATE_DRIVER } from './ConstansClassLinks';
+
 
 
 class Driver extends Component{
@@ -45,7 +47,7 @@ class Driver extends Component{
 
     getData = () => {
         const peselToCheck = this.state.inputPeselValue;
-        const URL = `http://localhost:8080/driver/getCost/${peselToCheck}`;
+        const URL = `${GET_COST}/${peselToCheck}`;
         axios.get(URL).then(results => {
             this.setState({
                 cost: results.data.cost,
@@ -69,7 +71,7 @@ class Driver extends Component{
     }
 
     onMeterButtonClicked = (action) => {
-        const URL = "http://localhost:8080/driver/updateDriver"+action+"Meter";
+        const URL = `${UPDATE_DRIVER}`+action+"Meter";
         axios.put(URL, {pesel: this.state.currentlyShownPesel})
             .then(results => {
                 this.setState({

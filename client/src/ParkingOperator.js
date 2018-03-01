@@ -5,7 +5,9 @@ import './input.css';
 import './button.css';
 import axios from 'axios';
 import driverAndParkingOperatorValidation from './driverAndParkingOperatorValidation';
-import { MAX_INPUT_LENGTH_PARKING_OPERATOR, PARKING_OPERATOR_ROLE_CODE } from './ConstansClass';
+import { MAX_INPUT_LENGTH_PARKING_OPERATOR, PARKING_OPERATOR_ROLE_CODE } from './ConstansClassValues';
+import {DRIVER_ID_DATA} from './ConstansClassLinks';
+
 import ValidationWarningReturner from './ValidationWarningReturner';
 
 class ParkingOperator extends Component{
@@ -29,7 +31,7 @@ class ParkingOperator extends Component{
 
     getData= () => {
         const ID = this.state.inputValueID;
-        const URL = `http://localhost:8080/driver/id/${ID}`;
+        const URL = `${DRIVER_ID_DATA}/${ID}`;
         let parkingMeterStatus;
         axios.get(URL).then(results =>{
             if (!results.data.meterActive){

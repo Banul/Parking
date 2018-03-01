@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import InputAndButtonComponent from './InputAndButtonComponent';
 import DataCreatorForParkingOwner from './DataCreatorForParkingOwner';
 import axios from 'axios';
+import {TRANSACTION_AGGREGATE} from './ConstansClassLinks';
+import {PARKING_OWNER_ROLE_CODE} from './ConstansClassValues';
 
 class ParkingOwner extends Component{
 
@@ -23,7 +25,7 @@ class ParkingOwner extends Component{
     getData = () => {
         const date = this.state.inputDate;
         console.log(date);
-        const URL = `http://localhost:8080/transactionAggregate/${date}`;
+        const URL = `${TRANSACTION_AGGREGATE}/${date}`;
         axios.get(URL).then(results => {
             this.setState({
                 income: results.data.totalIncome,
@@ -51,7 +53,7 @@ class ParkingOwner extends Component{
         console.log(this.state);
         return(
             <div>
-                <InputAndButtonComponent role = "parking owner"
+                <InputAndButtonComponent role = {PARKING_OWNER_ROLE_CODE}
                                          text = "Check income for a given day"
                                          onInputChange = {this.onInputChange}
                                          onButtonClicked = {this.onButtonClicked}/>
