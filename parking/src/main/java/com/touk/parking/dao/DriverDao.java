@@ -1,7 +1,5 @@
 package com.touk.parking.dao;
 
-import java.util.List;
-
 import com.touk.parking.model.DriverModelUpdateMeterState;
 import com.touk.parking.model.FullDriverModel;
 

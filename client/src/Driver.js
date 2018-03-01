@@ -8,10 +8,11 @@ class Driver extends Component{
     state = {
         cost: '',
         searchButtonClicked: false,
-        requestStatus: '',
+        getStatus: '',
         inputPeselValue: '',
         currentlyShownPesel: '',
-        isMeterActive: ''
+        isMeterActive: '',
+        putStatus: ''
     }
 
     onInputChange = (event) => {
@@ -25,28 +26,53 @@ class Driver extends Component{
     }
 
     getData = () => {
-        const peselTocheck = this.state.inputPeselValue;
-        const URL = `http://localhost:8080/driver/getCost/${peselTocheck}`;
+        const peselToCheck = this.state.inputPeselValue;
+        const URL = `http://localhost:8080/driver/getCost/${peselToCheck}`;
         axios.get(URL).then(results => {
             this.setState({
                 cost: results.data.cost,
-                requestStatus: results.status,
+                getStatus: results.status,
                 buttonClicked: true,
-                currentlyShownPesel: peselTocheck,
-                isMeterActive: results.data.meterActive
+                currentlyShownPesel: peselToCheck,
+                isMeterActive: results.data.meterActive,
+                showPanelToGetData: true
 
             })
         })
          .catch(error => {
             this.setState({
-                requestStatus: 404,
-                buttonClicked: true
+                getStatus: 404,
+                buttonClicked: true,
+                showPanelToGetData: true
+
             })
         })
         
     }
 
-    render(){
+    onMeterButtonClicked = (action) => {
+        console.log(action);
+        const URL = "http://localhost:8080/driver/updateDriver"+action+"Meter";
+        axios.put(URL, {pesel: this.state.currentlyShownPesel})
+            .then(results => {
+                console.log("onMeterButtonClicked");
+                console.log(results.status);
+                this.setState({
+                    putStatus: results.status,
+                    showPanelToGetData: false
+                })
+            })
+            .catch(error => {
+                this.setState({
+                    putStatus: 404,
+                    showPanelToGetData: false
+                })
+            })
+    }
+ 
+   render(){
+       console.log("renderrender");
+       console.log(this.state);
         return(
             <div>
              <InputAndButtonComponent role = "driver"
@@ -54,13 +80,14 @@ class Driver extends Component{
                                          text = "Get cost by PESEL"
                                          onButtonClicked = {this.onButtonClicked}
                                          />
-             <DataCreatorForDriver requestStatus = {this.state.requestStatus}
+             <DataCreatorForDriver requestStatus = {this.state.getStatus}
                                    price = {this.state.cost}
                                    buttonClicked = {this.state.buttonClicked}
                                    chosenPesel = {this.state.currentlyShownPesel}
                                    isMeterActive = {this.state.isMeterActive}
-
-             
+                                   onMeterButtonClicked = {(action) => this.onMeterButtonClicked(action)}
+                                   putStatus = {this.state.putStatus}
+                                   showPanelToGetData = {this.state.showPanelToGetData}
              />  
             </div>                         
         )

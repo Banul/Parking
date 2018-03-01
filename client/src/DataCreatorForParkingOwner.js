@@ -18,7 +18,7 @@ const DataCreatorForParkingOwner = (props) => {
             </div>
     }
     else if (props.buttonClicked & props.income === undefined){
-        divToReturn = <div>There is no {props.checkedDate} in database</div>
+        divToReturn = <div>This date does not exist in database</div>
     }
     return divToReturn;
 

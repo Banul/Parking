@@ -35,12 +35,14 @@ public class DriverController {
 		return driverService.createModelForDriver(pesel);
 	}
 
+	@CrossOrigin
 	@PutMapping(value = "updateDriverStopMeter", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void updateDriverMeterStop(@RequestBody DriverModelUpdateMeterState driverUpdate) {
 
 		driverService.updateDriverDataStopMeter(driverUpdate);
 	}
 
+	@CrossOrigin
 	@PutMapping(value = "updateDriverStartMeter", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void updateDriverMeterStart(@RequestBody DriverModelUpdateMeterState driverUpdate) {
 		driverService.updateDriverDataStartMeter(driverUpdate);
