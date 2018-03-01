@@ -13,13 +13,9 @@ const styleError = {
 
 const DataCreatorForDriver = (props) => {
 
-     let divToReturn = <div></div>;
-
-         if (props.requestStatus !== 200 & props.buttonClicked === true & props.showPanelToGetData){
-            divToReturn = <div> Connection error </div>
-        }
-
-        else if (props.price !== undefined & props.buttonClicked & props.showPanelToGetData){            
+    let divToReturn = <div></div>;
+      
+    if (props.price !== undefined & props.buttonClicked & props.showDataAboutCurrentMeterStatus){            
             let informationAboutMeterStatus;
 
             if (props.isMeterActive === false){
@@ -39,16 +35,21 @@ const DataCreatorForDriver = (props) => {
          </div>
 
         }
-        else if (props.buttonClicked & props.price === undefined & props.showPanelToGetData){
+
+    else if (props.requestStatus !== 200 & props.buttonClicked === true & props.showDataAboutCurrentMeterStatus){
+            divToReturn = <div> Connection error </div>
+        }
+
+    else if (props.buttonClicked & props.price === undefined & props.showDataAboutCurrentMeterStatus){
             divToReturn = <div style = {styleError}> Driver with entered PESEL does not exist </div>
         }
 
-        else if (props.putStatus === 200  & !props.showPanelToGetData){
+    else if (props.putStatus === 200  & !props.showDataAboutCurrentMeterStatus){
             console.log("asudasiu");
             divToReturn = <div style = {styleSuccess}> Data sucesfully put </div> 
         }
 
-        else if (props.putStatus === 404 & !props.showPanelToGetData){
+    else if (props.putStatus === 404 & !props.showDataAboutCurrentMeterStatus){
             divToReturn = <div style = {styleError}> Error while putting data </div>
         }
 

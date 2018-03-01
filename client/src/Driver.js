@@ -12,7 +12,8 @@ class Driver extends Component{
         inputPeselValue: '',
         currentlyShownPesel: '',
         isMeterActive: '',
-        putStatus: ''
+        putStatus: '',
+        showDataAboutCurrentMeterStatus: true
     }
 
     onInputChange = (event) => {
@@ -35,7 +36,7 @@ class Driver extends Component{
                 buttonClicked: true,
                 currentlyShownPesel: peselToCheck,
                 isMeterActive: results.data.meterActive,
-                showPanelToGetData: true
+                showDataAboutCurrentMeterStatus: true
 
             })
         })
@@ -43,7 +44,7 @@ class Driver extends Component{
             this.setState({
                 getStatus: 404,
                 buttonClicked: true,
-                showPanelToGetData: true
+                showDataAboutCurrentMeterStatus: true
 
             })
         })
@@ -51,28 +52,23 @@ class Driver extends Component{
     }
 
     onMeterButtonClicked = (action) => {
-        console.log(action);
         const URL = "http://localhost:8080/driver/updateDriver"+action+"Meter";
         axios.put(URL, {pesel: this.state.currentlyShownPesel})
             .then(results => {
-                console.log("onMeterButtonClicked");
-                console.log(results.status);
                 this.setState({
                     putStatus: results.status,
-                    showPanelToGetData: false
+                    showDataAboutCurrentMeterStatus: false
                 })
             })
             .catch(error => {
                 this.setState({
                     putStatus: 404,
-                    showPanelToGetData: false
+                    showDataAboutCurrentMeterStatus: false
                 })
             })
     }
  
    render(){
-       console.log("renderrender");
-       console.log(this.state);
         return(
             <div>
              <InputAndButtonComponent role = "driver"
@@ -87,7 +83,7 @@ class Driver extends Component{
                                    isMeterActive = {this.state.isMeterActive}
                                    onMeterButtonClicked = {(action) => this.onMeterButtonClicked(action)}
                                    putStatus = {this.state.putStatus}
-                                   showPanelToGetData = {this.state.showPanelToGetData}
+                                   showDataAboutCurrentMeterStatus = {this.state.showDataAboutCurrentMeterStatus}
              />  
             </div>                         
         )
