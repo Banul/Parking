@@ -1,23 +1,26 @@
 import React from "react"
 
 const DataCreatorForDriver = (props) => {
-     let divToReturn = <div></div>;
+
+     let divToReturn = <div>ooo</div>;
 
          if (props.requestStatus !== 200 & props.buttonClicked === true){
             divToReturn = <div> Connection error </div>
         }
 
-        else if (props.currentDriverId !== undefined & props.buttonClicked){
+        else if (props.price !== undefined & props.buttonClicked){
+            console.log("aaa");
             const styleSuccess = {
                margin: "20px",
                color: "#006603"
              }
             divToReturn =  <div style = {styleSuccess}> 
+               <p> Checked PESEL : {props.chosenPesel} </p>
                <p> Price : {props.price} </p>
 
             </div>
         }
-        else if (props.buttonClicked & props.currentDriverId === undefined){
+        else if (props.buttonClicked & props.price === undefined){
             const styleError = {
                 margin: "20px",
                 color: "#670003"

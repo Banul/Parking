@@ -7,10 +7,10 @@ class Driver extends Component{
 
     state = {
         cost: '',
-        chosenPesel: '',
         searchButtonClicked: false,
         requestStatus: '',
-        inputPeselValue: ''
+        inputPeselValue: '',
+        currentlyShownPesel: ''
     }
 
     onInputChange = (event) => {
@@ -24,26 +24,41 @@ class Driver extends Component{
     }
 
     getData = () => {
-        const pesel = this.state.inputPeselValue;
-        const URL = "http://localhost:8080/driver/getCost/1111";
+        const peselTocheck = this.state.inputPeselValue;
+        const URL = `http://localhost:8080/driver/getCost/${peselTocheck}`;
         axios.get(URL).then(results => {
             this.setState({
-                cost: results.data.cost
+                cost: results.data.cost,
+                requestStatus: results.status,
+                buttonClicked: true,
+                currentlyShownPesel: peselTocheck
             })
         })
-
+         .catch(error => {
+            this.setState({
+                requestStatus: 404,
+                buttonClicked: true
+            })
+        })
         
     }
 
     render(){
-        console.log(this.state);
         return(
+            <div>
              <InputAndButtonComponent role = "driver"
                                          onInputChange = {this.onInputChange}
                                          text = "Get cost by PESEL"
                                          onButtonClicked = {this.onButtonClicked}
                                          />
-             <DataCreatorForDriver>                           
+             <DataCreatorForDriver requestStatus = {this.state.requestStatus}
+                                   price = {this.state.cost}
+                                   buttonClicked = {this.state.buttonClicked}
+                                   chosenPesel = {this.state.currentlyShownPesel}
+
+             
+             />  
+            </div>                         
         )
     }
 }

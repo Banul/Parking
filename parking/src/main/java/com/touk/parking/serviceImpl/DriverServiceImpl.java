@@ -40,13 +40,21 @@ public class DriverServiceImpl implements DriverService {
 
 	public CostDriverModel createModelForDriver(int pesel) {
 		FullDriverModel driverModel = driverDao.getMeterLastStartAndStopTime(pesel);
+		CostDriverModel costDriverModel;
+		
+		try {
 		boolean isMeterActive = driverModel.isMeterActive();
 		String meterStart = driverModel.getMeterLastTimeStart();
 		String meterStop = driverModel.getMeterLastTimeStop();
 		boolean isVip = driverModel.isVip();
 		CostCounter counter = new CostCounter();
 		double cost = counter.getCost(meterStart, meterStop, isVip);
-		CostDriverModel costDriverModel = new CostDriverModel(cost, isMeterActive);
+		costDriverModel = new CostDriverModel(cost, isMeterActive);
+		}
+		
+		catch(Exception e) {
+			costDriverModel = null;
+		}
 
 		return costDriverModel;
 	}
