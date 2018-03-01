@@ -35,9 +35,8 @@ public class FullDriverModel {
 		
 	}
 	
-	public FullDriverModel(String timeStart, String timeStop, boolean isVip, boolean isMeterActive) {
+	public FullDriverModel(String timeStart, boolean isVip, boolean isMeterActive) {
 		this.meterLastTimeStart = timeStart;
-		this.meterLastTimeStop = timeStop;
 		this.isVip = isVip;
 		this.isMeterActive = isMeterActive;
 	}

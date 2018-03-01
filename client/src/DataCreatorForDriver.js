@@ -1,15 +1,25 @@
-import React from "react"
+import React from "react";
+import './button.css';
 
 const DataCreatorForDriver = (props) => {
 
-     let divToReturn = <div>ooo</div>;
+     let divToReturn = <div></div>;
 
          if (props.requestStatus !== 200 & props.buttonClicked === true){
             divToReturn = <div> Connection error </div>
         }
 
         else if (props.price !== undefined & props.buttonClicked){
-            console.log("aaa");
+            let informationAboutMeterStatus;
+
+            if (props.isMeterActive === 'false'){
+                informationAboutMeterStatus = "Meter is running";
+            }
+
+            else{
+                informationAboutMeterStatus = "Meter is not running";
+            }
+
             const styleSuccess = {
                margin: "20px",
                color: "#006603"
@@ -17,6 +27,11 @@ const DataCreatorForDriver = (props) => {
             divToReturn =  <div style = {styleSuccess}> 
                <p> Checked PESEL : {props.chosenPesel} </p>
                <p> Price : {props.price} </p>
+               <p> Meter status : {informationAboutMeterStatus} </p>
+            <button type="button" disabled = {props.isMeterActive} className="button btn btn-success">Start meter</button>
+            <button type="button" disabled = {!props.isMeterActive} className="button btn btn-danger">Stop meter</button>
+
+
 
             </div>
         }

@@ -1,5 +1,6 @@
 package com.touk.parking.serviceImpl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ import com.touk.parking.model.DriverModelUpdateMeterState;
 import com.touk.parking.model.FullDriverModel;
 import com.touk.parking.service.DriverService;
 import com.touk.parking.utils.CostCounter;
+import com.touk.parking.utils.CurrentDateReturner;
+import com.touk.parking.utils.DateConverter;
 
 @Service
 public class DriverServiceImpl implements DriverService {
@@ -39,20 +42,21 @@ public class DriverServiceImpl implements DriverService {
 	}
 
 	public CostDriverModel createModelForDriver(int pesel) {
-		FullDriverModel driverModel = driverDao.getMeterLastStartAndStopTime(pesel);
+	
+		FullDriverModel driverModel = driverDao.getMeterTime(pesel);
 		CostDriverModel costDriverModel;
-		
+
 		try {
-		boolean isMeterActive = driverModel.isMeterActive();
-		String meterStart = driverModel.getMeterLastTimeStart();
-		String meterStop = driverModel.getMeterLastTimeStop();
-		boolean isVip = driverModel.isVip();
-		CostCounter counter = new CostCounter();
-		double cost = counter.getCost(meterStart, meterStop, isVip);
-		costDriverModel = new CostDriverModel(cost, isMeterActive);
+			boolean isMeterActive = driverModel.isMeterActive();
+			Date meterStartDate = DateConverter.convertDate(driverModel.getMeterLastTimeStart());
+			Date currentDate = CurrentDateReturner.returnCurrentDate();
+			boolean isVip = driverModel.isVip();
+			CostCounter counter = new CostCounter();
+			double cost = counter.getCost(meterStartDate, currentDate, isVip, isMeterActive);
+			costDriverModel = new CostDriverModel(cost, isMeterActive);
 		}
-		
-		catch(Exception e) {
+
+		catch (Exception e) {
 			costDriverModel = null;
 		}
 

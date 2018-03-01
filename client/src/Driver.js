@@ -10,7 +10,8 @@ class Driver extends Component{
         searchButtonClicked: false,
         requestStatus: '',
         inputPeselValue: '',
-        currentlyShownPesel: ''
+        currentlyShownPesel: '',
+        isMeterActive: ''
     }
 
     onInputChange = (event) => {
@@ -31,7 +32,9 @@ class Driver extends Component{
                 cost: results.data.cost,
                 requestStatus: results.status,
                 buttonClicked: true,
-                currentlyShownPesel: peselTocheck
+                currentlyShownPesel: peselTocheck,
+                isMeterActive: results.data.meterActive
+
             })
         })
          .catch(error => {
@@ -55,6 +58,7 @@ class Driver extends Component{
                                    price = {this.state.cost}
                                    buttonClicked = {this.state.buttonClicked}
                                    chosenPesel = {this.state.currentlyShownPesel}
+                                   isMeterActive = {this.state.isMeterActive}
 
              
              />  

@@ -12,22 +12,24 @@ public class CostCounter {
 	private final double REGULAR_PRICE_FACTOR = 2;
 	private final double VIP_SECOND_HOUR_PRICE = 2;
 
-	public double getCost(String dateStart, String dateStop, boolean isVip) {
-		int differance = countDifferanceBetweenDates(dateStart, dateStop);
-		double cost = countCost(differance, isVip);
+	public double getCost(Date dateStart, Date currentDate, boolean isVip, boolean isMeterActive) {
+		double cost = 0;
+		if (isMeterActive){
+			int differance = countDifferanceBetweenDates(dateStart, currentDate);
+			cost = countCost(differance, isVip);
+		}
 
 		return cost;
 	}
 
-	private int countDifferanceBetweenDates(String dateStart, String dateStop) {
-		Date parsedDateStart = DateConverter.convertDate(dateStart);
-		Date parsedDateEnd = DateConverter.convertDate(dateStop);
-		double milisecondsDiff = ((parsedDateEnd.getTime() - parsedDateStart.getTime()));
-		if (milisecondsDiff > 0)
-			return (int) (milisecondsDiff / MILISECONDS_TO_HOUR) + 1; // parsing to int, so it will round to lower
-																		// number, that's why +1
-		else
-			return 0;
+	private int countDifferanceBetweenDates(Date dateStart, Date currentDate) {
+		double milisecondsDiff = ((currentDate.getTime() - dateStart.getTime()));
+		System.out.println("milisecDiffVIP");
+		System.out.println(milisecondsDiff);	
+
+		
+		return (int) (milisecondsDiff / MILISECONDS_TO_HOUR) + 1; // parsing to int, so it will round to lower
+																	// number, that's why +1
 
 	}
 
