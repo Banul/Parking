@@ -58,15 +58,15 @@ public class TransactionControllerTest {
 		mvc.perform(get(url).contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
 				.andExpect(jsonPath("$[0].id", equalTo(5))).andExpect(jsonPath("$[0].date", equalTo("2010-01-01")))
 				.andExpect(jsonPath("$[0].price", equalTo(50.5)))
-				.andExpect(jsonPath("$[0].driverModel.id", equalTo(10)))
-				.andExpect(jsonPath("$[0].driverModel.name", equalTo("Bożena")))
-				.andExpect(jsonPath("$[0].driverModel.surname", equalTo("Małolepsza")))
-				.andExpect(jsonPath("$[0].driverModel.meterLastTimeStart", equalTo("2018-01-01")))
-				.andExpect(jsonPath("$[0].driverModel.meterLastTimeStop", equalTo("2018-01-02")))
-				.andExpect(jsonPath("$[0].driverModel.pesel", equalTo(2222)))
-				.andExpect(jsonPath("$[0].driverModel.vehicleNumber", equalTo("XYZ")))
-				.andExpect(jsonPath("$[0].driverModel.vip", equalTo(true)))
-				.andExpect(jsonPath("$[0].driverModel.meterActive", equalTo(false)));
+				.andExpect(jsonPath("$[0].fullDriverModel.id", equalTo(10)))
+				.andExpect(jsonPath("$[0].fullDriverModel.name", equalTo("Bożena")))
+				.andExpect(jsonPath("$[0].fullDriverModel.surname", equalTo("Małolepsza")))
+				.andExpect(jsonPath("$[0].fullDriverModel.meterLastTimeStart", equalTo("2018-01-01")))
+				.andExpect(jsonPath("$[0].fullDriverModel.meterLastTimeStop", equalTo("2018-01-02")))
+				.andExpect(jsonPath("$[0].fullDriverModel.pesel", equalTo(2222)))
+				.andExpect(jsonPath("$[0].fullDriverModel.vehicleNumber", equalTo("XYZ")))
+				.andExpect(jsonPath("$[0].fullDriverModel.vip", equalTo(true)))
+				.andExpect(jsonPath("$[0].fullDriverModel.meterActive", equalTo(false)));
 
 	}
 
