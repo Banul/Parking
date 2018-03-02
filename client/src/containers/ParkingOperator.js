@@ -3,7 +3,7 @@ import axios from 'axios';
 import InputAndButtonComponent from '../components/InputAndButtonComponent';
 import DataCreatorForParkingOperator from '../components/DataCreatorForParkingOperator';
 import validateDriverAndParkingOperator from '../validationFunctions/validateDriverAndParkingOperator';
-import { MAX_INPUT_LENGTH_PARKING_OPERATOR, PARKING_OPERATOR_ROLE_CODE } from '../constances/ConstansValues';
+import { MAX_INPUT_LENGTH_PARKING_OPERATOR, PARKING_OPERATOR_ROLE_CODE } from '../constants/ConstansValues';
 import {DRIVER_ID_DATA} from '../constants/ConstansLinks';
 import ValidationWarningReturner from '../components/ValidationWarningReturner';
 

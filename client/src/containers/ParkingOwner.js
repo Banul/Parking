@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from 'axios';
 import InputAndButtonComponent from '../components/InputAndButtonComponent';
 import DataCreatorForParkingOwner from '../components/DataCreatorForParkingOwner';
-import {TRANSACTION_AGGREGATE} from '../constances/ConstansLinks';
+import {TRANSACTION_AGGREGATE} from '../constants/ConstansLinks';
 import {PARKING_OWNER_ROLE_CODE} from '../constants/ConstansValues';
 import validateParkingOwner from '../validationFunctions/validateParkingOwner';
 import ValidationWarningReturner from '../components/ValidationWarningReturner';
