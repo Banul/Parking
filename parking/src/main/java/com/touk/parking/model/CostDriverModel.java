@@ -6,7 +6,7 @@ public class CostDriverModel {
 		this.cost = cost;
 		this.isMeterActive = isMeterActive;
 	}
-	
+
 	private double cost;
 	private boolean isMeterActive;
 
@@ -25,7 +25,5 @@ public class CostDriverModel {
 	public void setMeterActive(boolean isMeterActive) {
 		this.isMeterActive = isMeterActive;
 	}
-	
-	
 
 }

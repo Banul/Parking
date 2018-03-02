@@ -1,11 +1,8 @@
 package com.touk.parking.serviceImpl;
 
 import java.util.Date;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.touk.parking.dao.DriverDao;
 import com.touk.parking.model.CostDriverModel;
 import com.touk.parking.model.DriverModelUpdateMeterState;
@@ -42,7 +39,7 @@ public class DriverServiceImpl implements DriverService {
 	}
 
 	public CostDriverModel createModelForDriver(int pesel) {
-	
+
 		FullDriverModel driverModel = driverDao.getMeterTime(pesel);
 		CostDriverModel costDriverModel;
 

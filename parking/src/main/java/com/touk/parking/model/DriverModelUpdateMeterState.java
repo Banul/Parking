@@ -1,12 +1,10 @@
 package com.touk.parking.model;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 
 import com.touk.parking.utils.CurrentDateReturner;
 
 public class DriverModelUpdateMeterState {
-
 
 	private int pesel;
 	private boolean isMeterActive;
@@ -36,5 +34,4 @@ public class DriverModelUpdateMeterState {
 		this.dateToUpdate = date;
 	}
 
-	
 }

@@ -10,14 +10,11 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
-
 import com.touk.parking.model.FullDriverModel;
 import com.touk.parking.service.DriverService;
 import static org.mockito.BDDMockito.*;
-
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -35,27 +32,25 @@ public class DriverControllerTest {
 	public void driverTest_CheckingSearchingDriverById() throws Exception {
 		FullDriverModel testDriver = createDriverForTest();
 		given(service.getDriverDataById(12)).willReturn(testDriver);
-		runTest("/driver/id/12");
+		performTest("/driver/id/12");
 
 	}
 
-
-	public FullDriverModel createDriverForTest() {
-		FullDriverModel testDriver = new FullDriverModel(12, "Krzysztof", "Jarzyna", "2018-01-01", "2017-12-30", true, false, 1111,
-				 "ZZZ");
+	private FullDriverModel createDriverForTest() {
+		FullDriverModel testDriver = new FullDriverModel(12, "Krzysztof", "Jarzyna", "2018-01-01", "2017-12-30", true,
+				false, 1111, "ZZZ");
 		return testDriver;
 
 	}
 
-	public void runTest(String url) throws Exception {
+	private void performTest(String url) throws Exception {
 		mvc.perform(get(url).contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
 				.andExpect(jsonPath("$.name", equalTo("Krzysztof")))
 				.andExpect(jsonPath("$.surname", equalTo("Jarzyna")))
 				.andExpect(jsonPath("$.meterLastTimeStart", equalTo("2018-01-01")))
 				.andExpect(jsonPath("$.meterLastTimeStop", equalTo("2017-12-30")))
 				.andExpect(jsonPath("$.vip", equalTo(true))).andExpect(jsonPath("$.meterActive", equalTo(false)))
-				.andExpect(jsonPath("$.pesel", equalTo(1111)))
-				.andExpect(jsonPath("$.vehicleNumber", equalTo("ZZZ")));
+				.andExpect(jsonPath("$.pesel", equalTo(1111))).andExpect(jsonPath("$.vehicleNumber", equalTo("ZZZ")));
 	}
 
 }

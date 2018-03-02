@@ -1,17 +1,13 @@
 package com.touk.parking.model;
 
-import java.util.Date;
 import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Table(name = "driver")
 @Entity
@@ -19,7 +15,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 public class FullDriverModel {
 
-	public FullDriverModel(int id, String fName, String sName, String meterLastStartTime, String meterLastStopTime, boolean vip, boolean meterActive, int pesel, String vehicleNumber){
+	public FullDriverModel(int id, String fName, String sName, String meterLastStartTime, String meterLastStopTime,
+			boolean vip, boolean meterActive, int pesel, String vehicleNumber) {
 		this.id = id;
 		this.name = fName;
 		this.surname = sName;
@@ -30,17 +27,17 @@ public class FullDriverModel {
 		this.vehicleNumber = vehicleNumber;
 		this.pesel = pesel;
 	}
-	
+
 	public FullDriverModel() {
-		
+
 	}
-	
+
 	public FullDriverModel(String timeStart, boolean isVip, boolean isMeterActive) {
 		this.meterLastTimeStart = timeStart;
 		this.isVip = isVip;
 		this.isMeterActive = isMeterActive;
 	}
-	
+
 	@Id
 	@Column(name = "id")
 	private int id;
@@ -65,7 +62,7 @@ public class FullDriverModel {
 
 	@Column(name = "vehicle_number")
 	private String vehicleNumber;
-	
+
 	@Column(name = "pesel")
 	private int pesel;
 
@@ -145,7 +142,5 @@ public class FullDriverModel {
 	public void setPesel(int pesel) {
 		this.pesel = pesel;
 	}
-
-
 
 }

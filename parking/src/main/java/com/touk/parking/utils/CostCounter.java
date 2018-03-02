@@ -1,8 +1,5 @@
 package com.touk.parking.utils;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.Period;
 import java.util.Date;
 
 public class CostCounter {
@@ -14,20 +11,19 @@ public class CostCounter {
 
 	public double getCost(Date dateStart, Date currentDate, boolean isVip, boolean isMeterActive) {
 		double cost = 0;
-		if (isMeterActive){
+		if (isMeterActive) {
 			int differance = countDifferanceBetweenDates(dateStart, currentDate);
 			cost = countCost(differance, isVip);
 		}
 
-		return cost;
+		return Math.round(cost * 100.0) / 100.0;
 	}
 
 	private int countDifferanceBetweenDates(Date dateStart, Date currentDate) {
 		double milisecondsDiff = ((currentDate.getTime() - dateStart.getTime()));
 		System.out.println("milisecDiffVIP");
-		System.out.println(milisecondsDiff);	
+		System.out.println(milisecondsDiff);
 
-		
 		return (int) (milisecondsDiff / MILISECONDS_TO_HOUR) + 1; // parsing to int, so it will round to lower
 																	// number, that's why +1
 

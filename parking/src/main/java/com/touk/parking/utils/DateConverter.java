@@ -14,7 +14,7 @@ public class DateConverter {
 			return parsedDate;
 
 		} catch (ParseException e) {
-			
+
 			return null;
 		}
 	}

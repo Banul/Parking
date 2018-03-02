@@ -2,10 +2,8 @@ package com.touk.parking.utils;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import com.touk.parking.utils.CostCounter;
 
 public class CostCounterTest {
@@ -15,7 +13,7 @@ public class CostCounterTest {
 	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 	@Test
-	public void testCostCountingMethodForAVipDriver_meterEnabled() {
+	public void testCostCountingMethodForAVipDriver_meterEnabled() {		
 		for (int i = 0; i < createStartMeterTestScenarios().length; i++) {
 			result = counter.getCost(createStartMeterTestScenarios()[i], createStopMeterTestScenarios()[i], true, true);
 			assertEquals(createExpectedResultsForVipDriver()[i], result, 0);
@@ -35,7 +33,8 @@ public class CostCounterTest {
 	@Test
 	public void testCostCountingMethodForDriver_meterDisabled() {
 		for (int i = 0; i < createStartMeterTestScenarios().length; i++) {
-			result = counter.getCost(createStartMeterTestScenarios()[i], createStopMeterTestScenarios()[i], false, false);
+			result = counter.getCost(createStartMeterTestScenarios()[i], createStopMeterTestScenarios()[i], false,
+					false);
 			assertEquals(createExpectedResultsWhenMeterIsDisabled()[i], result, 0);
 
 		}
@@ -54,7 +53,7 @@ public class CostCounterTest {
 	}
 
 	private double[] createExpectedResultsForVipDriver() {
-		double[] expectedResultsVip = new double[] { 0, 26.375, 0 };
+		double[] expectedResultsVip = new double[] { 0, 26.38 };
 		return expectedResultsVip;
 	}
 
@@ -62,9 +61,9 @@ public class CostCounterTest {
 		double[] expectedResultsRegular = new double[] { 1, 63 };
 		return expectedResultsRegular;
 	}
-	
+
 	private double[] createExpectedResultsWhenMeterIsDisabled() {
-		double[] expectedResultsDisabledMeter = new double[] {0,0,0};
+		double[] expectedResultsDisabledMeter = new double[] { 0, 0, 0 };
 		return expectedResultsDisabledMeter;
 	}
 

@@ -4,20 +4,19 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table (name = "parking")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@Table(name = "parking")
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 
 public class ParkingModel {
-	
-	@Id 
-	@Column (name = "id")
+
+	@Id
+	@Column(name = "id")
 	int id;
-	
-	@Column (name = "car_limit")
+
+	@Column(name = "car_limit")
 	int carlimit;
 
 	public int getId() {
@@ -35,8 +34,5 @@ public class ParkingModel {
 	public void setCarlimit(int carlimit) {
 		this.carlimit = carlimit;
 	}
-	
-	
-	
-	
+
 }
