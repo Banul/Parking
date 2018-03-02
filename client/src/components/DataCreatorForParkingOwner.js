@@ -1,5 +1,6 @@
 import React from "react";
 import '../styles/errorAndSuccesStyles.css';
+import {CURRENCY_PLN} from '../constants/ConstansValues';
 
 const DataCreatorForParkingOwner = (props) => {
     let divToReturn = <div> </div>;
@@ -12,7 +13,7 @@ const DataCreatorForParkingOwner = (props) => {
 
         divToReturn = <div className = "styleSuccess">
                 <p> Checked date: {props.checkedDate} </p>
-                <p> Total income: {props.income} </p>
+                <p> Total income: {props.income} {CURRENCY_PLN}</p>
             </div>
     }
 

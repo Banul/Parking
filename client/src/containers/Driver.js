@@ -4,8 +4,8 @@ import InputAndButtonComponent from '../components/InputAndButtonComponent';
 import DataCreatorForDriver from '../components/DataCreatorForDriver';
 import validateDriverAndParkingOperator from '../validationFunctions/validateDriverAndParkingOperator';
 import ValidationWarningReturner from '../components/ValidationWarningReturner';
-import { MAX_INPUT_LENGTH_DRIVER, DRIVER_ROLE_CODE } from '../constances/ConstansValues';
-import { GET_COST, UPDATE_DRIVER } from '../constances/ConstansLinks';
+import { MAX_INPUT_LENGTH_DRIVER, DRIVER_ROLE_CODE } from '../constants/ConstansValues';
+import { GET_COST, UPDATE_DRIVER } from '../constants/ConstansLinks';
 
 
 

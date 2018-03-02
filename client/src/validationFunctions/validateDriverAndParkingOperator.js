@@ -1,4 +1,4 @@
-import { DRIVER_ROLE_CODE, PARKING_OPERATOR_ROLE_CODE } from '../constances/ConstansValues';
+import { DRIVER_ROLE_CODE, PARKING_OPERATOR_ROLE_CODE } from '../constants/ConstansValues';
 
 const validateDriverAndParkingOperator = (inputValue, inputMaxLength, role) =>{
     const inputLength = inputValue.length;

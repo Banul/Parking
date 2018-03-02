@@ -1,6 +1,8 @@
 import React from "react";
 import '../styles/button.css';
 import '../styles/errorAndSuccesStyles.css';
+import {CURRENCY_PLN} from '../constants/ConstansValues';
+
 
 const DataCreatorForDriver = (props) => {
 
@@ -19,7 +21,7 @@ const DataCreatorForDriver = (props) => {
            
             divToReturn =  <div className = "styleSuccess"> 
                <p> Checked PESEL : {props.chosenPesel} </p>
-               <p> Price : {props.price} </p>
+               <p> Price : {props.price} {CURRENCY_PLN}</p>
                <p> Meter status : {informationAboutMeterStatus} </p>
             <button type="button" disabled = {props.isMeterActive} onClick = {() => props.onMeterButtonClicked("Start")} className="button btn btn-success">Start meter</button>
             <button type="button" disabled = {!props.isMeterActive} onClick = {() => props.onMeterButtonClicked("Stop")} className="button btn btn-danger">Stop meter</button>
