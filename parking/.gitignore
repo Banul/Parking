@@ -1,2 +1,5 @@
 /target/
-/pidFile.txt
+pidFile.txt
+.settings
+.classpath
+.project
