@@ -1,8 +1,6 @@
-import React from "react";
-import { DRIVER_ROLE_CODE, PARKING_OPERATOR_ROLE_CODE } from './ConstansClassValues';
+import { DRIVER_ROLE_CODE, PARKING_OPERATOR_ROLE_CODE } from '../constances/ConstansValues';
 
-
-const driverAndParkingOperatorValidation = (inputValue, inputMaxLength, role) =>{
+const validateDriverAndParkingOperator = (inputValue, inputMaxLength, role) =>{
     const inputLength = inputValue.length;
     const inputValueLower = inputValue.toLowerCase();
     if (role === DRIVER_ROLE_CODE){
@@ -23,4 +21,4 @@ const driverAndParkingOperatorValidation = (inputValue, inputMaxLength, role) =>
     }
 }
 
-export default driverAndParkingOperatorValidation;
+export default validateDriverAndParkingOperator;

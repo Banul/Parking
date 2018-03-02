@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-import InputAndButtonComponent from './InputAndButtonComponent';
-import DataCreatorForParkingOwner from './DataCreatorForParkingOwner';
 import axios from 'axios';
-import {TRANSACTION_AGGREGATE} from './ConstansClassLinks';
-import {PARKING_OWNER_ROLE_CODE} from './ConstansClassValues';
+import InputAndButtonComponent from '../components/InputAndButtonComponent';
+import DataCreatorForParkingOwner from '../components/DataCreatorForParkingOwner';
+import {TRANSACTION_AGGREGATE} from '../constances/ConstansLinks';
+import {PARKING_OWNER_ROLE_CODE} from '../constances/ConstansValues';
+import validateParkingOwner from '../validationFunctions/validateParkingOwner';
+import ValidationWarningReturner from '../components/ValidationWarningReturner';
 
 class ParkingOwner extends Component{
 
@@ -12,19 +14,19 @@ class ParkingOwner extends Component{
        buttonClicked: false,
        requestStatus: '',
        income: '',
-       checkedDate: ''
-
+       checkedDate: '',
+       parkingOwnerValidationStatus: ''
     }
 
     onInputChange = (event) => {
         this.setState({
-            inputDate: event.target.value
+            inputDate: event.target.value,
+            parkingOwnerValidationStatus: true
         });
     }
 
     getData = () => {
         const date = this.state.inputDate;
-        console.log(date);
         const URL = `${TRANSACTION_AGGREGATE}/${date}`;
         axios.get(URL).then(results => {
             this.setState({
@@ -41,22 +43,29 @@ class ParkingOwner extends Component{
 
             })
         })
-
-
     }
 
      onButtonClicked = () => {
-        this.getData();
+        const validationStatus = validateParkingOwner(this.state.inputDate);
+        if (validationStatus === true){
+            this.getData();
+        }
+        else {
+            this.setState({
+                parkingOwnerValidationStatus: false
+            })
+        }
     }
 
     render(){
-        console.log(this.state);
         return(
             <div>
                 <InputAndButtonComponent role = {PARKING_OWNER_ROLE_CODE}
                                          text = "Check income for a given day"
                                          onInputChange = {this.onInputChange}
                                          onButtonClicked = {this.onButtonClicked}/>
+            
+                <ValidationWarningReturner validationStatus = {this.state.parkingOwnerValidationStatus}/>
 
                 <DataCreatorForParkingOwner buttonClicked = {this.state.buttonClicked}
                                             checkedDate = {this.state.checkedDate}

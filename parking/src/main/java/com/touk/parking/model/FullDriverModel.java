@@ -12,7 +12,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table(name = "driver")
 @Entity
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-
 public class FullDriverModel {
 
 	public FullDriverModel(int id, String fName, String sName, String meterLastStartTime, String meterLastStopTime,

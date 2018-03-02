@@ -13,7 +13,6 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Entity
 @Table(name = "transaction")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-
 public class TransactionModel {
 
 	public TransactionModel(int id, String date, double price, boolean isTransactionFinished, FullDriverModel driver) {

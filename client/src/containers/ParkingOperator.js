@@ -1,14 +1,11 @@
 import React, { Component } from "react";
-import InputAndButtonComponent from './InputAndButtonComponent';
-import DataCreatorForParkingOperator from './DataCreatorForParkingOperator';
-import './input.css';
-import './button.css';
 import axios from 'axios';
-import driverAndParkingOperatorValidation from './driverAndParkingOperatorValidation';
-import { MAX_INPUT_LENGTH_PARKING_OPERATOR, PARKING_OPERATOR_ROLE_CODE } from './ConstansClassValues';
-import {DRIVER_ID_DATA} from './ConstansClassLinks';
-
-import ValidationWarningReturner from './ValidationWarningReturner';
+import InputAndButtonComponent from '../components/InputAndButtonComponent';
+import DataCreatorForParkingOperator from '../components/DataCreatorForParkingOperator';
+import validateDriverAndParkingOperator from '../validationFunctions/validateDriverAndParkingOperator';
+import { MAX_INPUT_LENGTH_PARKING_OPERATOR, PARKING_OPERATOR_ROLE_CODE } from '../constances/ConstansValues';
+import {DRIVER_ID_DATA} from '../constances/ConstansLinks';
+import ValidationWarningReturner from '../components/ValidationWarningReturner';
 
 class ParkingOperator extends Component{
         
@@ -59,7 +56,7 @@ class ParkingOperator extends Component{
     }
 
     onButtonClicked = () => {
-        const validationStatus = driverAndParkingOperatorValidation(this.state.inputValueID, MAX_INPUT_LENGTH_PARKING_OPERATOR, PARKING_OPERATOR_ROLE_CODE);
+        const validationStatus = validateDriverAndParkingOperator(this.state.inputValueID, MAX_INPUT_LENGTH_PARKING_OPERATOR, PARKING_OPERATOR_ROLE_CODE);
         if (validationStatus === true){
             this.getData();
         }

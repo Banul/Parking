@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
-import InputAndButtonComponent from './InputAndButtonComponent';
-import DataCreatorForDriver from './DataCreatorForDriver';
 import axios from 'axios';
-import driverAndParkingOperatorValidation from './driverAndParkingOperatorValidation';
-import ValidationWarningReturner from './ValidationWarningReturner';
-import { MAX_INPUT_LENGTH_DRIVER, DRIVER_ROLE_CODE } from './ConstansClassValues';
-import { GET_COST, UPDATE_DRIVER } from './ConstansClassLinks';
+import InputAndButtonComponent from '../components/InputAndButtonComponent';
+import DataCreatorForDriver from '../components/DataCreatorForDriver';
+import validateDriverAndParkingOperator from '../validationFunctions/validateDriverAndParkingOperator';
+import ValidationWarningReturner from '../components/ValidationWarningReturner';
+import { MAX_INPUT_LENGTH_DRIVER, DRIVER_ROLE_CODE } from '../constances/ConstansValues';
+import { GET_COST, UPDATE_DRIVER } from '../constances/ConstansLinks';
 
 
 
@@ -33,7 +33,7 @@ class Driver extends Component{
     }
 
     onButtonClicked = () => {
-        const validationStatus = driverAndParkingOperatorValidation(this.state.inputPeselValue, MAX_INPUT_LENGTH_DRIVER, DRIVER_ROLE_CODE);
+        const validationStatus = validateDriverAndParkingOperator(this.state.inputPeselValue, MAX_INPUT_LENGTH_DRIVER, DRIVER_ROLE_CODE);
         if (validationStatus === true){
             this.getData();
         }

@@ -1,5 +1,5 @@
 import React from "react";
-import './errorAndSuccesStyles.css';
+import '../styles/errorAndSuccesStyles.css';
 
 const DataCreatorForParkingOwner = (props) => {
     let divToReturn = <div> </div>;
@@ -15,11 +15,12 @@ const DataCreatorForParkingOwner = (props) => {
                 <p> Total income: {props.income} </p>
             </div>
     }
+
     else if (props.buttonClicked & props.income === undefined){
         divToReturn = <div>This date does not exist in database</div>
     }
-    return divToReturn;
 
+    return divToReturn;
 }
 
 export default DataCreatorForParkingOwner;

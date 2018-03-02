@@ -21,9 +21,6 @@ public class CostCounter {
 
 	private int countDifferanceBetweenDates(Date dateStart, Date currentDate) {
 		double milisecondsDiff = ((currentDate.getTime() - dateStart.getTime()));
-		System.out.println("milisecDiffVIP");
-		System.out.println(milisecondsDiff);
-
 		return (int) (milisecondsDiff / MILISECONDS_TO_HOUR) + 1; // parsing to int, so it will round to lower
 																	// number, that's why +1
 

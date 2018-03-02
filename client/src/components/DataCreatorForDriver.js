@@ -1,15 +1,6 @@
 import React from "react";
-import './button.css';
-
- const styleSuccess = {
-               margin: "20px",
-               color: "#006603"
-             }
-
-const styleError = {
-                margin: "20px",
-                color: "#670003"
-            }
+import '../styles/button.css';
+import '../styles/errorAndSuccesStyles.css';
 
 const DataCreatorForDriver = (props) => {
 
@@ -26,7 +17,7 @@ const DataCreatorForDriver = (props) => {
                 informationAboutMeterStatus = "Meter is running";
             }
            
-            divToReturn =  <div style = {styleSuccess}> 
+            divToReturn =  <div className = "styleSuccess"> 
                <p> Checked PESEL : {props.chosenPesel} </p>
                <p> Price : {props.price} </p>
                <p> Meter status : {informationAboutMeterStatus} </p>
@@ -41,15 +32,15 @@ const DataCreatorForDriver = (props) => {
         }
 
     else if (props.buttonClicked & props.price === undefined & props.showDataAboutCurrentMeterStatus){
-            divToReturn = <div style = {styleError}> Driver with entered PESEL does not exist </div>
+            divToReturn = <div className = "styleError"> Driver with entered PESEL does not exist </div>
         }
 
     else if (props.putStatus === 200  & props.showDataAboutSuccessfullPut === true){
-            divToReturn = <div style = {styleSuccess}> Data sucessfully put </div> 
+            divToReturn = <div className = "styleSuccess"> Data sucessfully put </div> 
         }
 
     else if (props.putStatus === 404 & !props.showDataAboutSuccessfullPut){
-            divToReturn = <div style = {styleError}> Error while putting data </div>
+            divToReturn = <div className = "styleSuccess"> Error while putting data </div>
         }
 
         

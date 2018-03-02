@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import Menu from './Menu';
+import Menu from './components/Menu';
 import { BrowserRouter } from 'react-router-dom';
 
 
