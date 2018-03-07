@@ -21,7 +21,6 @@ import com.touk.parking.service.TransactionService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebMvcTest(TransactionController.class)
-
 public class TransactionControllerTest {
 
 	@Autowired
@@ -43,10 +42,7 @@ public class TransactionControllerTest {
 				false, 2222, "XYZ");
 
 		TransactionModel transaction = new TransactionModel(5, "2010-01-01", 50.5, true, testDriver);
-		List<TransactionModel> transactionList = Arrays.asList(transaction);
-
-		return transactionList;
-
+		return Arrays.asList(transaction);
 	}
 
 	private void performTest(String url) throws Exception {

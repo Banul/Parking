@@ -13,8 +13,9 @@ class Driver extends Component{
 
     state = {
         cost: '',
+        currency: '',
         searchButtonClicked: false,
-        getStatus: '',
+        errorGet: '',
         inputPeselValue: '',
         currentlyShownPesel: '',
         isMeterActive: '',
@@ -36,8 +37,7 @@ class Driver extends Component{
         const validationStatus = validateDriverAndParkingOperator(this.state.inputPeselValue, MAX_INPUT_LENGTH_DRIVER, DRIVER_ROLE_CODE);
         if (validationStatus === true){
             this.getData();
-        }
-        else{
+        } else{
             this.setState({
                 driverValidationStatus: false,
                 showDataAboutCurrentMeterStatus: false
@@ -50,8 +50,9 @@ class Driver extends Component{
         const URL = `${GET_COST}/${peselToCheck}`;
         axios.get(URL).then(results => {
             this.setState({
-                cost: results.data.cost,
-                getStatus: results.status,
+                cost: results.data.moneyModel.amount,
+                currency: results.data.moneyModel.currency,
+                errorGet: false,
                 buttonClicked: true,
                 currentlyShownPesel: peselToCheck,
                 isMeterActive: results.data.meterActive,
@@ -61,7 +62,7 @@ class Driver extends Component{
         })
          .catch(error => {
             this.setState({
-                getStatus: 404,
+                errorGet: true,
                 buttonClicked: true,
                 showDataAboutCurrentMeterStatus: true
 
@@ -71,7 +72,7 @@ class Driver extends Component{
     }
 
     onMeterButtonClicked = (action) => {
-        const URL = `${UPDATE_DRIVER}`+action+"Meter";
+        const URL = `${UPDATE_DRIVER}`+"-"+action;
         axios.put(URL, {pesel: this.state.currentlyShownPesel})
             .then(results => {
                 this.setState({
@@ -97,13 +98,17 @@ class Driver extends Component{
                                          text = "Get cost by PESEL"
                                          onButtonClicked = {this.onButtonClicked}
                                          />
-            <ValidationWarningReturner validationStatus = {this.state.driverValidationStatus}/>
-             <DataCreatorForDriver requestStatus = {this.state.getStatus}
+            <ValidationWarningReturner validationStatus = {this.state.driverValidationStatus} 
+                                       getStatus = {this.state.getStatus}
+                                       isButtonClicked = {this.state.buttonClicked}
+            />
+             <DataCreatorForDriver errorGet = {this.state.errorGet}
                                    price = {this.state.cost}
+                                   currency = {this.state.currency}
                                    buttonClicked = {this.state.buttonClicked}
                                    chosenPesel = {this.state.currentlyShownPesel}
                                    isMeterActive = {this.state.isMeterActive}
-                                   onMeterButtonClicked = {(action) => this.onMeterButtonClicked(action)}
+                                   onMeterButtonClicked = {this.onMeterButtonClicked}
                                    putStatus = {this.state.putStatus}
                                    showDataAboutCurrentMeterStatus = {this.state.showDataAboutCurrentMeterStatus}
                                    driverValidation = {this.state.driverValidationStatus}

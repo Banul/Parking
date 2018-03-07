@@ -1,5 +1,7 @@
 package com.touk.parking.model;
 
+import java.util.Currency;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -29,16 +31,19 @@ public class TransactionModel {
 
 	@Id
 	@Column(name = "id")
-	int id;
+	private int id;
 
 	@Column(name = "date")
-	String date;
+	private String date;
 
 	@Column(name = "price")
-	double price;
+	private double price;
 
 	@Column(name = "transaction_finished")
-	boolean isTransactionFinished;
+	private boolean isTransactionFinished;
+	
+	@Column(name = "currency")
+	private Currency currency;
 
 	@ManyToOne(targetEntity = FullDriverModel.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "driver_id")
@@ -76,6 +81,14 @@ public class TransactionModel {
 
 	public void setTransactionFinished(boolean isTransactionFinished) {
 		this.isTransactionFinished = isTransactionFinished;
+	}
+
+	public Currency getCurrency() {
+		return currency;
+	}
+
+	public void setCurrency(Currency currency) {
+		this.currency = currency;
 	}
 
 }

@@ -12,7 +12,8 @@ class ParkingOwner extends Component{
     state = {
        inputDate : '',
        buttonClicked: false,
-       requestStatus: '',
+       currency: '',
+       errorGet: '',
        income: '',
        checkedDate: '',
        parkingOwnerValidationStatus: ''
@@ -30,15 +31,17 @@ class ParkingOwner extends Component{
         const URL = `${TRANSACTION_AGGREGATE}/${date}`;
         axios.get(URL).then(results => {
             this.setState({
-                income: results.data.totalIncome,
+                income: results.data.moneyModel.amount,
+                currency: results.data.moneyModel.currency,
                 checkedDate: results.data.date,
                 buttonClicked: true,
-                requestStatus: results.status
+                requestStatus: results.status,
+                errorGet: true
             })
         })
         .catch(error => {
             this.setState({
-                requestStatus: 404,
+                errorGet: false,
                 buttonClicked: true
 
             })
@@ -49,8 +52,7 @@ class ParkingOwner extends Component{
         const validationStatus = validateParkingOwner(this.state.inputDate);
         if (validationStatus === true){
             this.getData();
-        }
-        else {
+        } else {
             this.setState({
                 parkingOwnerValidationStatus: false
             })
@@ -69,8 +71,9 @@ class ParkingOwner extends Component{
 
                 <DataCreatorForParkingOwner buttonClicked = {this.state.buttonClicked}
                                             checkedDate = {this.state.checkedDate}
-                                            requestStatus = {this.state.requestStatus}
-                                            income = {this.state.income}/>
+                                            errorGet = {this.state.errorGet}
+                                            income = {this.state.income}
+                                            currency = {this.state.currency}/>
             </div>
         )
     }

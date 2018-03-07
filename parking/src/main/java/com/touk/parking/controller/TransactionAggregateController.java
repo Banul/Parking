@@ -5,12 +5,11 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.touk.parking.model.TransactionAggregateModel;
+import com.touk.parking.model.TransactionAggregateModelContainingMoneyModel;
 import com.touk.parking.service.TransactionAggregateService;
 
 @RestController
-@RequestMapping(value = "/transactionAggregate")
-
+@RequestMapping(value = "/transaction-aggregate")
 public class TransactionAggregateController {
 
 	@Autowired
@@ -18,7 +17,7 @@ public class TransactionAggregateController {
 
 	@CrossOrigin
 	@RequestMapping(value = "/{date}")
-	public TransactionAggregateModel getTransactionEarningByDate(@PathVariable String date) {
+	public TransactionAggregateModelContainingMoneyModel getTransactionEarningByDate(@PathVariable String date) {
 		return transactionAggregateService.getEarningsByDate(date);
 	}
 

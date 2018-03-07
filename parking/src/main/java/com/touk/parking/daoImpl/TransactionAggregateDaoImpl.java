@@ -1,6 +1,7 @@
 package com.touk.parking.daoImpl;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -28,7 +29,7 @@ public class TransactionAggregateDaoImpl implements TransactionAggregateDao {
 
 		try {
 			transactionData = q.getSingleResult();
-		} catch (Exception e) {
+		} catch (NoResultException e) {
 			transactionData = null;
 		}
 

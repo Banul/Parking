@@ -13,13 +13,12 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.touk.parking.model.FullDriverModel;
 import com.touk.parking.service.DriverService;
 import static org.mockito.BDDMockito.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebMvcTest(DriverController.class)
-
 public class DriverControllerTest {
 
 	@Autowired
@@ -37,10 +36,8 @@ public class DriverControllerTest {
 	}
 
 	private FullDriverModel createDriverForTest() {
-		FullDriverModel testDriver = new FullDriverModel(12, "Krzysztof", "Jarzyna", "2018-01-01", "2017-12-30", true,
+		return new FullDriverModel(12, "Krzysztof", "Jarzyna", "2018-01-01", "2017-12-30", true,
 				false, 1111, "ZZZ");
-		return testDriver;
-
 	}
 
 	private void performTest(String url) throws Exception {

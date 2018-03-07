@@ -1,5 +1,7 @@
 package com.touk.parking.utils;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Date;
 
 public class CostCounter {
@@ -9,14 +11,14 @@ public class CostCounter {
 	private final double REGULAR_PRICE_FACTOR = 2;
 	private final double VIP_SECOND_HOUR_PRICE = 2;
 
-	public double getCost(Date dateStart, Date currentDate, boolean isVip, boolean isMeterActive) {
-		double cost = 0;
+	public BigDecimal getCost(Date dateStart, Date currentDate, boolean isVip, boolean isMeterActive) {
+		BigDecimal cost = new BigDecimal("0.00");
 		if (isMeterActive) {
 			int differance = countDifferanceBetweenDates(dateStart, currentDate);
 			cost = countCost(differance, isVip);
 		}
 
-		return Math.round(cost * 100.0) / 100.0;
+		return cost.setScale(2, RoundingMode.HALF_EVEN);
 	}
 
 	private int countDifferanceBetweenDates(Date dateStart, Date currentDate) {
@@ -26,7 +28,7 @@ public class CostCounter {
 
 	}
 
-	private double countCost(int differance, boolean isVip) {
+	private BigDecimal countCost(int differance, boolean isVip) {
 		double cost;
 		if (isVip == false)
 			// sum of geometric series formula
@@ -36,7 +38,7 @@ public class CostCounter {
 		else
 			cost = 0;
 
-		return cost;
+		return BigDecimal.valueOf(cost);
 	}
 
 }

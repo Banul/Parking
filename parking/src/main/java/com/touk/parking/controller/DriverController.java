@@ -28,21 +28,21 @@ public class DriverController {
 	}
 
 	@CrossOrigin
-	@RequestMapping(value = "getCost/{pesel}")
+	@RequestMapping(value = "get-cost/{pesel}")
 	public CostDriverModel getCost(@PathVariable int pesel) {
 
 		return driverService.createModelForDriver(pesel);
 	}
 
 	@CrossOrigin
-	@PutMapping(value = "updateDriverStopMeter", consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PutMapping(value = "update-driver-stop", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void updateDriverMeterStop(@RequestBody DriverModelUpdateMeterState driverUpdate) {
 
 		driverService.updateDriverDataStopMeter(driverUpdate);
 	}
 
 	@CrossOrigin
-	@PutMapping(value = "updateDriverStartMeter", consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PutMapping(value = "update-driver-start", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void updateDriverMeterStart(@RequestBody DriverModelUpdateMeterState driverUpdate) {
 		driverService.updateDriverDataStartMeter(driverUpdate);
 	}

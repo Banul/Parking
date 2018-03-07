@@ -1,12 +1,15 @@
 package com.touk.parking.serviceImpl;
 
+import java.math.BigDecimal;
 import java.util.Date;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.touk.parking.dao.DriverDao;
 import com.touk.parking.model.CostDriverModel;
 import com.touk.parking.model.DriverModelUpdateMeterState;
 import com.touk.parking.model.FullDriverModel;
+import com.touk.parking.model.MoneyModel;
 import com.touk.parking.service.DriverService;
 import com.touk.parking.utils.CostCounter;
 import com.touk.parking.utils.CurrentDateReturner;
@@ -25,15 +28,15 @@ public class DriverServiceImpl implements DriverService {
 		return driverDao.getDriverDataById(id);
 	}
 
+	@Transactional
 	public void updateDriverDataStopMeter(DriverModelUpdateMeterState driverUpdate) {
-
 		driverUpdate.setMeterActive(false);
 		driverDao.updateDriverData(driverUpdate, DATABASE_COLUMN_NAME_STOP_TIME);
 
 	}
 
+	@Transactional
 	public void updateDriverDataStartMeter(DriverModelUpdateMeterState driverUpdate) {
-
 		driverUpdate.setMeterActive(true);
 		driverDao.updateDriverData(driverUpdate, DATABASE_COLUMN_NAME_START_TIME);
 	}
@@ -49,8 +52,9 @@ public class DriverServiceImpl implements DriverService {
 			Date currentDate = CurrentDateReturner.returnCurrentDate();
 			boolean isVip = driverModel.isVip();
 			CostCounter counter = new CostCounter();
-			double cost = counter.getCost(meterStartDate, currentDate, isVip, isMeterActive);
-			costDriverModel = new CostDriverModel(cost, isMeterActive);
+			BigDecimal cost = counter.getCost(meterStartDate, currentDate, isVip, isMeterActive);
+			MoneyModel moneyToPay = MoneyModel.pln(cost);
+			costDriverModel = new CostDriverModel(moneyToPay, isMeterActive);
 		}
 
 		catch (Exception e) {

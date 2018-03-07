@@ -57,5 +57,5 @@ WITH (
 
 
 CREATE TABLE transaction_aggregate AS 
-(SELECT date, SUM(price) as total FROM transaction GROUP BY date);
+(SELECT date, SUM(price) as total, currency FROM transaction GROUP BY date, currency);
 

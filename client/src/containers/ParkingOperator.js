@@ -33,8 +33,7 @@ class ParkingOperator extends Component{
         axios.get(URL).then(results =>{
             if (!results.data.meterActive){
                 parkingMeterStatus = "not working";
-            }
-            else{
+            } else{
                 parkingMeterStatus = "working"
             }
 
@@ -48,6 +47,7 @@ class ParkingOperator extends Component{
             })
         })
         .catch(error => {
+            console.log("parking op error");
             this.setState({
                 requestStatus: 404,
                 buttonClicked: true
@@ -59,8 +59,7 @@ class ParkingOperator extends Component{
         const validationStatus = validateDriverAndParkingOperator(this.state.inputValueID, MAX_INPUT_LENGTH_PARKING_OPERATOR, PARKING_OPERATOR_ROLE_CODE);
         if (validationStatus === true){
             this.getData();
-        }
-        else{
+        } else{
             this.setState({
                 parkingOperatorValidationStatus: false,
             })

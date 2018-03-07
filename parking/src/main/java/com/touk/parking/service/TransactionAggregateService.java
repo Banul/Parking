@@ -1,9 +1,9 @@
 package com.touk.parking.service;
 
-import com.touk.parking.model.TransactionAggregateModel;
+import com.touk.parking.model.TransactionAggregateModelContainingMoneyModel;
 
 public interface TransactionAggregateService {
 
-	public TransactionAggregateModel getEarningsByDate(String date);
+	public TransactionAggregateModelContainingMoneyModel getEarningsByDate(String date);
 
 }

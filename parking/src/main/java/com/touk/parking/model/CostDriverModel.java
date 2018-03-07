@@ -2,20 +2,20 @@ package com.touk.parking.model;
 
 public class CostDriverModel {
 
-	public CostDriverModel(double cost, boolean isMeterActive) {
-		this.cost = cost;
+	public CostDriverModel(MoneyModel moneyModel, boolean isMeterActive) {
+		this.moneyModel = moneyModel;
 		this.isMeterActive = isMeterActive;
 	}
 
-	private double cost;
+	private MoneyModel moneyModel;
 	private boolean isMeterActive;
 
-	public double getCost() {
-		return cost;
+	public MoneyModel getMoneyModel() {
+		return moneyModel;
 	}
 
-	public void setCost(double cost) {
-		this.cost = cost;
+	public void setMoneyModel(MoneyModel moneyModel) {
+		this.moneyModel = moneyModel;
 	}
 
 	public boolean isMeterActive() {

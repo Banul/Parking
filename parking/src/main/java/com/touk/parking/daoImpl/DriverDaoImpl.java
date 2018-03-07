@@ -1,6 +1,7 @@
 package com.touk.parking.daoImpl;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -31,7 +32,7 @@ public class DriverDaoImpl implements DriverDao {
 
 		try {
 			driverData = q.getSingleResult();
-		} catch (Exception e) {
+		} catch (NoResultException e) {
 			driverData = null;
 		}
 
@@ -51,17 +52,17 @@ public class DriverDaoImpl implements DriverDao {
 
 		try {
 			results = q.getSingleResult();
-		} catch (Exception e) {
+
+		} catch (NoResultException e) {
 			results = null;
 		}
 
 		return results;
 
 	}
-
+	
 	@Transactional
 	public void updateDriverData(DriverModelUpdateMeterState driverUpdate, String timeColumnToUpdate) {
-
 		boolean meterNewStatus = driverUpdate.isMeterActive();
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaUpdate<FullDriverModel> update = cb.createCriteriaUpdate(FullDriverModel.class);
@@ -72,7 +73,7 @@ public class DriverDaoImpl implements DriverDao {
 					.where(cb.equal(root.get("pesel"), driverUpdate.getPesel()));
 			em.createQuery(update).executeUpdate();
 		} catch (Exception e) {
-
+			
 		}
 	}
 

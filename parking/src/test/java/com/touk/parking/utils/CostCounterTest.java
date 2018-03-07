@@ -2,21 +2,25 @@ package com.touk.parking.utils;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
+
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import com.touk.parking.model.MoneyModel;
 import com.touk.parking.utils.CostCounter;
 
 public class CostCounterTest {
 
 	private CostCounter counter = new CostCounter();
-	private double result;
+	private BigDecimal result;
 	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 	@Test
 	public void testCostCountingMethodForAVipDriver_meterEnabled() {		
 		for (int i = 0; i < createStartMeterTestScenarios().length; i++) {
 			result = counter.getCost(createStartMeterTestScenarios()[i], createStopMeterTestScenarios()[i], true, true);
-			assertEquals(createExpectedResultsForVipDriver()[i], result, 0);
+			assertEquals(createExpectedResultsForVipDriver()[i].getAmount(), result);
 		}
 	}
 
@@ -25,7 +29,7 @@ public class CostCounterTest {
 		for (int i = 0; i < createStartMeterTestScenarios().length; i++) {
 			result = counter.getCost(createStartMeterTestScenarios()[i], createStopMeterTestScenarios()[i], false,
 					true);
-			assertEquals(createExpectedResultsForRegularDriver()[i], result, 0);
+			assertEquals(createExpectedResultsForRegularDriver()[i].getAmount(), result);
 
 		}
 	}
@@ -35,7 +39,7 @@ public class CostCounterTest {
 		for (int i = 0; i < createStartMeterTestScenarios().length; i++) {
 			result = counter.getCost(createStartMeterTestScenarios()[i], createStopMeterTestScenarios()[i], false,
 					false);
-			assertEquals(createExpectedResultsWhenMeterIsDisabled()[i], result, 0);
+			assertEquals(createExpectedResultsWhenMeterIsDisabled()[i].getAmount(), result);
 
 		}
 	}
@@ -52,18 +56,18 @@ public class CostCounterTest {
 		return stopMeterTestScenarios;
 	}
 
-	private double[] createExpectedResultsForVipDriver() {
-		double[] expectedResultsVip = new double[] { 0, 26.38 };
+	private MoneyModel[] createExpectedResultsForVipDriver() {
+		MoneyModel[] expectedResultsVip = new MoneyModel[] {MoneyModel.pln(new BigDecimal("0.00")), MoneyModel.pln (new BigDecimal ("26.38")) };
 		return expectedResultsVip;
 	}
 
-	private double[] createExpectedResultsForRegularDriver() {
-		double[] expectedResultsRegular = new double[] { 1, 63 };
+	private MoneyModel[] createExpectedResultsForRegularDriver() {
+		MoneyModel[] expectedResultsRegular = new MoneyModel[] {MoneyModel.pln(new BigDecimal ("1.00")), MoneyModel.pln(new BigDecimal("63.00"))};
 		return expectedResultsRegular;
 	}
 
-	private double[] createExpectedResultsWhenMeterIsDisabled() {
-		double[] expectedResultsDisabledMeter = new double[] { 0, 0, 0 };
+	private MoneyModel[] createExpectedResultsWhenMeterIsDisabled() {
+		MoneyModel[] expectedResultsDisabledMeter = new MoneyModel[] {MoneyModel.pln(new BigDecimal("0.00")), MoneyModel.pln(new BigDecimal("0.00")), MoneyModel.pln(new BigDecimal("0.00")) };
 		return expectedResultsDisabledMeter;
 	}
 

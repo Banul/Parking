@@ -10,7 +10,6 @@ import com.touk.parking.service.TransactionService;
 
 @RestController
 @RequestMapping(value = "/transaction")
-
 public class TransactionController {
 
 	@Autowired
