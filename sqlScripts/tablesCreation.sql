@@ -2,13 +2,13 @@
 CREATE TABLE public.driver
 (
   meter_active boolean,
-  first_name character varying,
-  surname character varying,
+  first_name character varying(20),
+  surname character varying(30),
   id integer NOT NULL DEFAULT nextval('driver_seq'::regclass),
   meter_last_start_time timestamp without time zone,
   meter_last_stop_time timestamp without time zone,
   PESEL integer,
-  vehicle_number character varying, 
+  vehicle_number character varying(15), 
   vip boolean,
   CONSTRAINT "Driver_pkey" PRIMARY KEY (id)
 )
@@ -36,11 +36,11 @@ ALTER TABLE public.parking
 CREATE TABLE public.transaction
 (
   id integer NOT NULL DEFAULT nextval('transaction_seq'::regclass),
-  date character varying,
+  date character varying(20),
   parking_id integer,
   driver_id integer,
   price double precision,
-  currency character varying,
+  currency character varying(10),
   transaction_finished boolean,
   CONSTRAINT transaction_pkey PRIMARY KEY (id),
   CONSTRAINT driver_fk FOREIGN KEY (driver_id)
