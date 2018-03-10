@@ -41,8 +41,7 @@ public class TransactionControllerTest {
 		FullDriverModel testDriver = new FullDriverModel(10, "Bożena", "Małolepsza", "2018-01-01", "2018-01-02", true,
 				false, 2222, "XYZ");
 
-		TransactionModel transaction = new TransactionModel(5, "2010-01-01", 50.5, true, testDriver);
-		return Arrays.asList(transaction);
+		return Arrays.asList(new TransactionModel(5, "2010-01-01", 50.5, true, testDriver));
 	}
 
 	private void performTest(String url) throws Exception {
