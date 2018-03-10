@@ -8,7 +8,7 @@ import com.touk.parking.constans.ConstansHolder;
 
 public class DateConverter {
 
-	public static Date convertDate(String dateString) throws ParseException  {
+	public Date convertDate(String dateString) throws ParseException  {
 		SimpleDateFormat sdf = new SimpleDateFormat(ConstansHolder.DATE_FORMAT);
 		Date parsedDate = sdf.parse(dateString);
 		return parsedDate;

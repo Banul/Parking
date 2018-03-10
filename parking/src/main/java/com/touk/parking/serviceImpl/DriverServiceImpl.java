@@ -22,6 +22,7 @@ public class DriverServiceImpl implements DriverService {
 
 	private final String DATABASE_COLUMN_NAME_STOP_TIME = "meterLastTimeStop";
 	private final String DATABASE_COLUMN_NAME_START_TIME = "meterLastTimeStart";
+	private DateConverter dateConverter = new DateConverter();
 
 	@Autowired
 	DriverDao driverDao;
@@ -49,7 +50,7 @@ public class DriverServiceImpl implements DriverService {
 		CostDriverModel costDriverModel;
 
 		boolean isMeterActive = driverModel.isMeterActive();
-		Date meterStartDate = DateConverter.convertDate(driverModel.getMeterLastTimeStart());
+		Date meterStartDate = dateConverter.convertDate(driverModel.getMeterLastTimeStart());
 		LocalDateTime currentDate = CurrentDateReturner.returnCurrentDate();
 		boolean isVip = driverModel.isVip();
 		CostCounter counter = new CostCounter();

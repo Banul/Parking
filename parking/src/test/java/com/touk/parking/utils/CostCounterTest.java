@@ -15,7 +15,8 @@ import com.touk.parking.model.MoneyModel;
 import com.touk.parking.utils.CostCounter;
 
 public class CostCounterTest {
-
+	
+	private DateConverter dateConverter = new DateConverter();
 	private CostCounter counter = new CostCounter();
 	private BigDecimal result;
 	SimpleDateFormat dateFormat = new SimpleDateFormat(ConstansHolder.DATE_FORMAT);
@@ -49,8 +50,8 @@ public class CostCounterTest {
 	}
 
 	private Date[] createStartMeterTestScenarios() throws ParseException {
-		Date[] startMeterTestScenarios = new Date[] { DateConverter.convertDate("2017-10-10 00:00:00"),
-				DateConverter.convertDate("2017-11-12 00:00:00") };
+		Date[] startMeterTestScenarios = new Date[] { dateConverter.convertDate("2017-10-10 00:00:00"),
+				dateConverter.convertDate("2017-11-12 00:00:00") };
 		return startMeterTestScenarios;
 	}
 

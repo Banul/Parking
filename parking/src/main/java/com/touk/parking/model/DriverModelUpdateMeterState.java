@@ -28,9 +28,10 @@ public class DriverModelUpdateMeterState {
 	}
 
 	public Date getDate() throws ParseException {
+		DateConverter dateConverter = new DateConverter();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(ConstansHolder.DATE_FORMAT);
         String formatDateTime = this.dateToUpdate.format(formatter);
-        Date output = DateConverter.convertDate(formatDateTime);
+        Date output = dateConverter.convertDate(formatDateTime);
         return output;
 	}
 	

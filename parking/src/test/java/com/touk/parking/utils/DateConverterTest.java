@@ -10,6 +10,7 @@ import org.junit.Test;
 
 public class DateConverterTest {
 
+	private DateConverter dateConverter = new DateConverter();
 	Calendar calendar = GregorianCalendar.getInstance();
 
 	@Test
@@ -18,7 +19,7 @@ public class DateConverterTest {
 		Date[] expectedDates = createExpectedDates();
 
 		for (int i = 0; i < datesToTest.length; i++) {
-			assertTrue((expectedDates[i].getTime() - DateConverter.convertDate(datesToTest[i]).getTime()) == 0);
+			assertTrue((expectedDates[i].getTime() - dateConverter.convertDate(datesToTest[i]).getTime()) == 0);
 		}
 
 	}
