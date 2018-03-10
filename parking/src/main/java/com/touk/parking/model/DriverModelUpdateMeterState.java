@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
+import com.touk.parking.constans.ConstansHolder;
 import com.touk.parking.utils.CurrentDateReturner;
 import com.touk.parking.utils.DateConverter;
 
@@ -27,7 +28,7 @@ public class DriverModelUpdateMeterState {
 	}
 
 	public Date getDate() throws ParseException {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(ConstansHolder.DATE_FORMAT);
         String formatDateTime = this.dateToUpdate.format(formatter);
         Date output = DateConverter.convertDate(formatDateTime);
         return output;

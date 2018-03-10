@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.Date;
 
+import com.touk.parking.constans.ConstansHolder;
 import com.touk.parking.model.MoneyModel;
 import com.touk.parking.utils.CostCounter;
 
@@ -17,7 +18,7 @@ public class CostCounterTest {
 
 	private CostCounter counter = new CostCounter();
 	private BigDecimal result;
-	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	SimpleDateFormat dateFormat = new SimpleDateFormat(ConstansHolder.DATE_FORMAT);
 
 	@Test
 	public void testCostCountingMethodForAVipDriver_meterEnabled() throws ParseException {		
