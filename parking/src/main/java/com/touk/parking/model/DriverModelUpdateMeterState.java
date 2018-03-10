@@ -14,10 +14,6 @@ public class DriverModelUpdateMeterState {
 		return pesel;
 	}
 
-	public void setPesel(int pesel) {
-		this.pesel = pesel;
-	}
-
 	public boolean isMeterActive() {
 		return isMeterActive;
 	}
@@ -30,8 +26,5 @@ public class DriverModelUpdateMeterState {
 		return dateToUpdate;
 	}
 
-	public void setDate(Date date) {
-		this.dateToUpdate = date;
-	}
 
 }

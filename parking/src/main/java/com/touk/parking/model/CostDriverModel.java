@@ -14,16 +14,9 @@ public class CostDriverModel {
 		return moneyModel;
 	}
 
-	public void setMoneyModel(MoneyModel moneyModel) {
-		this.moneyModel = moneyModel;
-	}
-
 	public boolean isMeterActive() {
 		return isMeterActive;
 	}
 
-	public void setMeterActive(boolean isMeterActive) {
-		this.isMeterActive = isMeterActive;
-	}
 
 }

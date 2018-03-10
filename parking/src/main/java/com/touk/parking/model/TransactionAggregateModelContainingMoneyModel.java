@@ -14,10 +14,6 @@ public class TransactionAggregateModelContainingMoneyModel {
 		return date;
 	}
 
-	public void setDate(String date) {
-		this.date = date;
-	}
-
 	public MoneyModel getMoneyModel() {
 		return moneyModel;
 	}

@@ -37,10 +37,6 @@ public class TransactionAggregateModel {
 		return date;
 	}
 
-	public void setDate(String date) {
-		this.date = date;
-	}
-
 	public BigDecimal getTotalIncome() {
 		return totalIncome;
 	}

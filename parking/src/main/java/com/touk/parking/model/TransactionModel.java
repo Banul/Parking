@@ -55,10 +55,6 @@ public class TransactionModel {
 		return id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	public String getDate() {
 		return date;
 	}
