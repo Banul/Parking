@@ -10,9 +10,9 @@ import java.util.Date;
 public class CostCounter {
 
 	private final int MILISECONDS_TO_HOUR = 3600 * 1000;
-	private final double VIP_PRICE_FACTOR = 1.5;
-	private final double REGULAR_PRICE_FACTOR = 2;
-	private final double VIP_SECOND_HOUR_PRICE = 2;
+	private final BigDecimal VIP_PRICE_FACTOR = new BigDecimal ("1.5");
+	private final BigDecimal REGULAR_PRICE_FACTOR = new BigDecimal ("2");
+	private final BigDecimal VIP_SECOND_HOUR_PRICE = new BigDecimal ("2");
 
 	public BigDecimal getCost(Date dateStart, LocalDateTime currentDate, boolean isVip, boolean isMeterActive) {
 		BigDecimal cost = new BigDecimal("0.00");
@@ -26,7 +26,6 @@ public class CostCounter {
 
 	private int countDifferanceBetweenDates(Date dateStart, LocalDateTime currentDate) {
 		LocalDateTime ldt = LocalDateTime.ofInstant(dateStart.toInstant(), ZoneId.systemDefault());
-
 		long milisecondsDiff = Duration.between(ldt, currentDate).toMillis();
 		return (int) (milisecondsDiff / MILISECONDS_TO_HOUR) + 1; // parsing to int, so it will round to lower
 																	// number, that's why +1
@@ -34,16 +33,27 @@ public class CostCounter {
 	}
 
 	private BigDecimal countCost(int differance, boolean isVip) {
-		double cost;
-		if (isVip == false)
+		
+		BigDecimal costCounter;
+		BigDecimal costDenominator;
+		BigDecimal cost;
+		
+		if (isVip == false) {
 			// sum of geometric series formula
-			cost = (1 - Math.pow(REGULAR_PRICE_FACTOR, differance)) / ((1 - REGULAR_PRICE_FACTOR));
-		else if (differance > 1)
-			cost = VIP_SECOND_HOUR_PRICE * (1 - Math.pow(VIP_PRICE_FACTOR, differance - 1)) / ((1 - VIP_PRICE_FACTOR));
+			costCounter = (BigDecimal.valueOf(1).subtract(REGULAR_PRICE_FACTOR.pow(differance)));
+			costDenominator =  BigDecimal.valueOf(1).subtract(REGULAR_PRICE_FACTOR);
+			cost = costCounter.divide(costDenominator);
+		}
+			
+		else if (differance > 1) {
+			costCounter = (BigDecimal.valueOf(1).subtract(VIP_PRICE_FACTOR.pow(differance-1)));
+			costDenominator = BigDecimal.valueOf(1).subtract(VIP_PRICE_FACTOR);
+			cost = VIP_SECOND_HOUR_PRICE.multiply(costCounter.divide(costDenominator));
+		}
 		else
-			cost = 0;
+			cost = BigDecimal.valueOf(0);
 
-		return BigDecimal.valueOf(cost);
+		return cost;
 	}
 
 }
