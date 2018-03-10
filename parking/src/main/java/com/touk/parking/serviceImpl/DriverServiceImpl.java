@@ -1,6 +1,7 @@
 package com.touk.parking.serviceImpl;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.util.Date;
 import javax.transaction.Transactional;
@@ -30,19 +31,19 @@ public class DriverServiceImpl implements DriverService {
 	}
 
 	@Transactional
-	public void updateDriverDataStopMeter(DriverModelUpdateMeterState driverUpdate) {
+	public void updateDriverDataStopMeter(DriverModelUpdateMeterState driverUpdate) throws ParseException {
 		driverUpdate.setMeterActive(false);
 		driverDao.updateDriverData(driverUpdate, DATABASE_COLUMN_NAME_STOP_TIME);
 
 	}
 
 	@Transactional
-	public void updateDriverDataStartMeter(DriverModelUpdateMeterState driverUpdate) {
+	public void updateDriverDataStartMeter(DriverModelUpdateMeterState driverUpdate) throws ParseException {
 		driverUpdate.setMeterActive(true);
 		driverDao.updateDriverData(driverUpdate, DATABASE_COLUMN_NAME_START_TIME);
 	}
 
-	public CostDriverModel createModelForDriver(int pesel) {
+	public CostDriverModel createModelForDriver(int pesel) throws ParseException {
 
 		FullDriverModel driverModel = driverDao.getMeterTime(pesel);
 		CostDriverModel costDriverModel;

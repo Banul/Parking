@@ -4,6 +4,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.Month;
@@ -19,7 +20,7 @@ public class CostCounterTest {
 	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 	@Test
-	public void testCostCountingMethodForAVipDriver_meterEnabled() {		
+	public void testCostCountingMethodForAVipDriver_meterEnabled() throws ParseException {		
 		for (int i = 0; i < createStartMeterTestScenarios().length; i++) {
 			result = counter.getCost(createStartMeterTestScenarios()[i], createStopMeterTestScenarios()[i], true, true);
 			assertEquals(createExpectedResultsForVipDriver()[i].getAmount(), result);
@@ -27,7 +28,7 @@ public class CostCounterTest {
 	}
 
 	@Test
-	public void testCostCountingMethodForARegularDriver_meterEnabled() {
+	public void testCostCountingMethodForARegularDriver_meterEnabled() throws ParseException {
 		for (int i = 0; i < createStartMeterTestScenarios().length; i++) {
 			result = counter.getCost(createStartMeterTestScenarios()[i], createStopMeterTestScenarios()[i], false,
 					true);
@@ -37,7 +38,7 @@ public class CostCounterTest {
 	}
 
 	@Test
-	public void testCostCountingMethodForDriver_meterDisabled() {
+	public void testCostCountingMethodForDriver_meterDisabled() throws ParseException {
 		for (int i = 0; i < createStartMeterTestScenarios().length; i++) {
 			result = counter.getCost(createStartMeterTestScenarios()[i], createStopMeterTestScenarios()[i], false,
 					false);
@@ -46,7 +47,7 @@ public class CostCounterTest {
 		}
 	}
 
-	private Date[] createStartMeterTestScenarios() {
+	private Date[] createStartMeterTestScenarios() throws ParseException {
 		Date[] startMeterTestScenarios = new Date[] { DateConverter.convertDate("2017-10-10 00:00:00"),
 				DateConverter.convertDate("2017-11-12 00:00:00") };
 		return startMeterTestScenarios;

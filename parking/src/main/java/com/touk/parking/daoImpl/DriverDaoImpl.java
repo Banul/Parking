@@ -1,5 +1,7 @@
 package com.touk.parking.daoImpl;
 
+import java.text.ParseException;
+
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -27,15 +29,8 @@ public class DriverDaoImpl implements DriverDao {
 		Root<FullDriverModel> driver = cq.from(FullDriverModel.class);
 
 		cq.select(driver).where(cb.equal(driver.get("id"), id));
-		FullDriverModel driverData;
 		TypedQuery<FullDriverModel> q = em.createQuery(cq);
-
-		try {
-			driverData = q.getSingleResult();
-		} catch (NoResultException e) {
-			driverData = null;
-		}
-
+		FullDriverModel driverData = q.getSingleResult();
 		return driverData;
 	}
 
@@ -48,33 +43,22 @@ public class DriverDaoImpl implements DriverDao {
 		cq.multiselect(driver.get("meterLastTimeStart"), driver.get("isVip"), driver.get("isMeterActive"))
 				.where(cb.equal(driver.get("pesel"), pesel));
 		TypedQuery<FullDriverModel> q = em.createQuery(cq);
-		FullDriverModel results;
-
-		try {
-			results = q.getSingleResult();
-
-		} catch (NoResultException e) {
-			results = null;
-		}
-
+		FullDriverModel results = q.getSingleResult();
 		return results;
 
 	}
 	
 	@Transactional
-	public void updateDriverData(DriverModelUpdateMeterState driverUpdate, String timeColumnToUpdate) {
+	public void updateDriverData(DriverModelUpdateMeterState driverUpdate, String timeColumnToUpdate) throws ParseException {
 		boolean meterNewStatus = driverUpdate.isMeterActive();
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaUpdate<FullDriverModel> update = cb.createCriteriaUpdate(FullDriverModel.class);
 		Root<FullDriverModel> root = update.from(FullDriverModel.class);
 
-		try {
 			update.set("isMeterActive", meterNewStatus).set(timeColumnToUpdate, driverUpdate.getDate())
 					.where(cb.equal(root.get("pesel"), driverUpdate.getPesel()));
 			em.createQuery(update).executeUpdate();
-		} catch (Exception e) {
 			
-		}
 	}
 
 }

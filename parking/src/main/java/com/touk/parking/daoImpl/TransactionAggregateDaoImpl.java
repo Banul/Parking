@@ -25,14 +25,7 @@ public class TransactionAggregateDaoImpl implements TransactionAggregateDao {
 
 		cq.select(transactionAgg).where(cb.equal(transactionAgg.get("date"), date));
 		TypedQuery<TransactionAggregateModel> q = em.createQuery(cq);
-		TransactionAggregateModel transactionData;
-
-		try {
-			transactionData = q.getSingleResult();
-		} catch (NoResultException e) {
-			transactionData = null;
-		}
-
+		TransactionAggregateModel transactionData = q.getSingleResult();
 		return transactionData;
 
 	}

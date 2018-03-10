@@ -1,5 +1,7 @@
 package com.touk.parking.controller;
 
+import java.text.ParseException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -29,21 +31,21 @@ public class DriverController {
 
 	@CrossOrigin
 	@RequestMapping(value = "get-cost/{pesel}")
-	public CostDriverModel getCost(@PathVariable int pesel) {
+	public CostDriverModel getCost(@PathVariable int pesel) throws ParseException {
 
 		return driverService.createModelForDriver(pesel);
 	}
 
 	@CrossOrigin
 	@PutMapping(value = "update-driver-stop", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public void updateDriverMeterStop(@RequestBody DriverModelUpdateMeterState driverUpdate) {
+	public void updateDriverMeterStop(@RequestBody DriverModelUpdateMeterState driverUpdate) throws ParseException {
 
 		driverService.updateDriverDataStopMeter(driverUpdate);
 	}
 
 	@CrossOrigin
 	@PutMapping(value = "update-driver-start", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public void updateDriverMeterStart(@RequestBody DriverModelUpdateMeterState driverUpdate) {
+	public void updateDriverMeterStart(@RequestBody DriverModelUpdateMeterState driverUpdate) throws ParseException {
 		driverService.updateDriverDataStartMeter(driverUpdate);
 	}
 

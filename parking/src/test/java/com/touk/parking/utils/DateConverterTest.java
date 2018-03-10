@@ -1,6 +1,8 @@
 package com.touk.parking.utils;
 
 import static org.junit.Assert.*;
+
+import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -11,7 +13,7 @@ public class DateConverterTest {
 	Calendar calendar = GregorianCalendar.getInstance();
 
 	@Test
-	public void testDateConverter() {
+	public void testDateConverter() throws ParseException {
 		String[] datesToTest = createDatesToTest();
 		Date[] expectedDates = createExpectedDates();
 

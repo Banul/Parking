@@ -26,13 +26,7 @@ public class TransactionDaoImpl implements TransactionDao {
 
 		cq.select(transaction).where(cb.equal(transaction.get("date"), date));
 		TypedQuery<TransactionModel> q = em.createQuery(cq);
-		List<TransactionModel> transactionData;
-
-		try {
-			transactionData = q.getResultList();
-		} catch (NoResultException e) {
-			transactionData = null;
-		}
+		List<TransactionModel> transactionData = q.getResultList();
 
 		return transactionData;
 	}
