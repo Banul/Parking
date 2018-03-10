@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.Date;
 
 import com.touk.parking.model.MoneyModel;
@@ -50,9 +52,9 @@ public class CostCounterTest {
 		return startMeterTestScenarios;
 	}
 
-	private Date[] createStopMeterTestScenarios() {
-		Date[] stopMeterTestScenarios = new Date[] { DateConverter.convertDate("2017-10-10 00:02:30"),
-				DateConverter.convertDate("2017-11-12 05:30:00") };
+	private LocalDateTime[] createStopMeterTestScenarios() {
+		LocalDateTime[] stopMeterTestScenarios = new LocalDateTime[] 
+				{LocalDateTime.of( 2017, Month.OCTOBER, 10, 0, 2, 30), LocalDateTime.of(2017,Month.NOVEMBER,12,5,30,0)};
 		return stopMeterTestScenarios;
 	}
 

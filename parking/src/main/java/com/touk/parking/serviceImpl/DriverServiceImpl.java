@@ -1,6 +1,7 @@
 package com.touk.parking.serviceImpl;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Date;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,21 +47,15 @@ public class DriverServiceImpl implements DriverService {
 		FullDriverModel driverModel = driverDao.getMeterTime(pesel);
 		CostDriverModel costDriverModel;
 
-		try {
-			boolean isMeterActive = driverModel.isMeterActive();
-			Date meterStartDate = DateConverter.convertDate(driverModel.getMeterLastTimeStart());
-			Date currentDate = CurrentDateReturner.returnCurrentDate();
-			boolean isVip = driverModel.isVip();
-			CostCounter counter = new CostCounter();
-			BigDecimal cost = counter.getCost(meterStartDate, currentDate, isVip, isMeterActive);
-			MoneyModel moneyToPay = MoneyModel.pln(cost);
-			costDriverModel = new CostDriverModel(moneyToPay, isMeterActive);
-		}
-
-		catch (Exception e) {
-			costDriverModel = null;
-		}
-
+		boolean isMeterActive = driverModel.isMeterActive();
+		Date meterStartDate = DateConverter.convertDate(driverModel.getMeterLastTimeStart());
+		LocalDateTime currentDate = CurrentDateReturner.returnCurrentDate();
+		boolean isVip = driverModel.isVip();
+		CostCounter counter = new CostCounter();
+		BigDecimal cost = counter.getCost(meterStartDate, currentDate, isVip, isMeterActive);
+		MoneyModel moneyToPay = MoneyModel.pln(cost);
+		costDriverModel = new CostDriverModel(moneyToPay, isMeterActive);
+		
 		return costDriverModel;
 	}
 
