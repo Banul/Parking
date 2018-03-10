@@ -5,9 +5,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import org.springframework.stereotype.Repository;
 import com.touk.parking.dao.TransactionDao;
 import com.touk.parking.model.TransactionModel;
@@ -20,18 +17,18 @@ public class TransactionDaoImpl implements TransactionDao {
 
 	public List<TransactionModel> getTransactionsByDate(String date) throws NoResultException{
 
-		CriteriaBuilder cb = em.getCriteriaBuilder();
-		CriteriaQuery<TransactionModel> cq = cb.createQuery(TransactionModel.class);
-		Root<TransactionModel> transaction = cq.from(TransactionModel.class);
-
-		cq.select(transaction).where(cb.equal(transaction.get("date"), date));
-		TypedQuery<TransactionModel> q = em.createQuery(cq);
-		List<TransactionModel> transactionData = q.getResultList();
-		if (transactionData.isEmpty()) {
-			throw new NoResultException("Cannot get transactions by this date!");
-		}
-
-		return transactionData;
+		TypedQuery<TransactionModel> query = em.createQuery("select t from TransactionModel t where t.date=:date", TransactionModel.class);
+		query.setParameter("date", date);
+        query.setMaxResults(1);     
+        List<TransactionModel> trans = query.getResultList();
+        if (trans.size() != 0) {
+        	return trans;
+        }
+        
+        else {
+        	throw new NoResultException("No results for inserted date!");
+        }
+		
 	}
 
 }
