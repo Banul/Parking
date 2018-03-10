@@ -1,7 +1,6 @@
 package com.touk.parking.dao;
 
 import java.text.ParseException;
-
 import com.touk.parking.model.DriverModelUpdateMeterState;
 import com.touk.parking.model.FullDriverModel;
 

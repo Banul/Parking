@@ -18,7 +18,7 @@ public class TransactionDaoImpl implements TransactionDao {
 	@PersistenceContext
 	EntityManager em;
 
-	public List<TransactionModel> getTransactionsByDate(String date) {
+	public List<TransactionModel> getTransactionsByDate(String date) throws NoResultException{
 
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<TransactionModel> cq = cb.createQuery(TransactionModel.class);
@@ -27,6 +27,9 @@ public class TransactionDaoImpl implements TransactionDao {
 		cq.select(transaction).where(cb.equal(transaction.get("date"), date));
 		TypedQuery<TransactionModel> q = em.createQuery(cq);
 		List<TransactionModel> transactionData = q.getResultList();
+		if (transactionData.isEmpty()) {
+			throw new NoResultException("Cannot get transactions by this date!");
+		}
 
 		return transactionData;
 	}

@@ -1,7 +1,6 @@
 package com.touk.parking.model;
 
 import java.util.Currency;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;

@@ -17,7 +17,7 @@ public class TransactionAggregateDaoImpl implements TransactionAggregateDao {
 	@PersistenceContext
 	EntityManager em;
 
-	public TransactionAggregateModel getEarningsByDate(String date) {
+	public TransactionAggregateModel getEarningsByDate(String date) throws NoResultException{
 
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<TransactionAggregateModel> cq = cb.createQuery(TransactionAggregateModel.class);
@@ -26,6 +26,11 @@ public class TransactionAggregateDaoImpl implements TransactionAggregateDao {
 		cq.select(transactionAgg).where(cb.equal(transactionAgg.get("date"), date));
 		TypedQuery<TransactionAggregateModel> q = em.createQuery(cq);
 		TransactionAggregateModel transactionData = q.getSingleResult();
+		if (transactionData == null) {
+			throw new NoResultException ("This date does not exist in database!");
+		}
+
+
 		return transactionData;
 
 	}

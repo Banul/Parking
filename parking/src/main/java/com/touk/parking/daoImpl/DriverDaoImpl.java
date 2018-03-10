@@ -1,7 +1,6 @@
 package com.touk.parking.daoImpl;
 
 import java.text.ParseException;
-
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -22,7 +21,7 @@ public class DriverDaoImpl implements DriverDao {
 	@PersistenceContext
 	EntityManager em;
 
-	public FullDriverModel getDriverDataById(int id) {
+	public FullDriverModel getDriverDataById(int id) throws NoResultException{
 
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<FullDriverModel> cq = cb.createQuery(FullDriverModel.class);
@@ -31,10 +30,13 @@ public class DriverDaoImpl implements DriverDao {
 		cq.select(driver).where(cb.equal(driver.get("id"), id));
 		TypedQuery<FullDriverModel> q = em.createQuery(cq);
 		FullDriverModel driverData = q.getSingleResult();
+		if (driverData == null) {
+			throw new NoResultException("No such id in database!");
+		}
 		return driverData;
 	}
 
-	public FullDriverModel getMeterTime(int pesel) {
+	public FullDriverModel getMeterTime(int pesel) throws NoResultException{
 
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<FullDriverModel> cq = cb.createQuery(FullDriverModel.class);
@@ -44,6 +46,9 @@ public class DriverDaoImpl implements DriverDao {
 				.where(cb.equal(driver.get("pesel"), pesel));
 		TypedQuery<FullDriverModel> q = em.createQuery(cq);
 		FullDriverModel results = q.getSingleResult();
+		if (results == null) {
+			throw new NoResultException ("No such pesel in database!");
+		}
 		return results;
 
 	}
