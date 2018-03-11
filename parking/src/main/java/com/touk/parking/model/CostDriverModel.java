@@ -14,5 +14,10 @@ public class CostDriverModel {
 		return isMeterActive;
 	}
 
+	public MoneyModel getMoneyModel() {
+		return moneyModel;
+	}
+
+	
 
 }

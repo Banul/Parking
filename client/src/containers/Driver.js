@@ -72,7 +72,7 @@ class Driver extends Component{
     }
 
     onMeterButtonClicked = (action) => {
-        const URL = `${UPDATE_DRIVER}`+"-"+action;
+        const URL = `${UPDATE_DRIVER}`+"-"+action+`/${this.state.currentlyShownPesel}`;
         axios.put(URL, {pesel: this.state.currentlyShownPesel})
             .then(results => {
                 this.setState({
