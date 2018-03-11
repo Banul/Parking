@@ -7,7 +7,7 @@ import java.util.Currency;
 // source: https://stackoverflow.com/questions/1359817/using-bigdecimal-to-work-with-currencies
 public class MoneyModel {
 	private static final Currency PLN = Currency.getInstance("PLN");
-	private static final RoundingMode DEFAULT_ROUNDING = RoundingMode.HALF_EVEN;
+	private static final RoundingMode DEFAULT_ROUNDING = RoundingMode.HALF_UP;
 
 	private BigDecimal amount;
 	private Currency currency;

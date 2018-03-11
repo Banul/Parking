@@ -77,17 +77,9 @@ public class FullDriverModel {
 	public String getName() {
 		return name;
 	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
+	
 	public String getSurname() {
 		return surname;
-	}
-
-	public void setSurname(String surname) {
-		this.surname = surname;
 	}
 
 	public String getMeterLastTimeStart() {
@@ -100,10 +92,6 @@ public class FullDriverModel {
 
 	public boolean isVip() {
 		return isVip;
-	}
-
-	public void setVip(boolean isVip) {
-		this.isVip = isVip;
 	}
 
 	public boolean isMeterActive() {
@@ -126,16 +114,9 @@ public class FullDriverModel {
 		return vehicleNumber;
 	}
 
-	public void setVehicleNumber(String vehicleNumber) {
-		this.vehicleNumber = vehicleNumber;
-	}
 
 	public int getPesel() {
 		return pesel;
-	}
-
-	public void setPesel(int pesel) {
-		this.pesel = pesel;
 	}
 
 }

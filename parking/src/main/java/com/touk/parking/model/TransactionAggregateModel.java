@@ -40,10 +40,6 @@ public class TransactionAggregateModel {
 		return totalIncome;
 	}
 
-	public void setTotalIncome(BigDecimal totalIncome) {
-		this.totalIncome = totalIncome;
-	}
-
 	public Currency getCurrency() {
 		return currency;
 	}

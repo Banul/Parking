@@ -10,10 +10,6 @@ public class CostDriverModel {
 	private MoneyModel moneyModel;
 	private boolean isMeterActive;
 
-	public MoneyModel getMoneyModel() {
-		return moneyModel;
-	}
-
 	public boolean isMeterActive() {
 		return isMeterActive;
 	}
