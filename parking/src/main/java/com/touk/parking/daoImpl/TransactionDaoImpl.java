@@ -5,11 +5,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 import com.touk.parking.dao.TransactionDao;
 import com.touk.parking.model.TransactionModel;
 
 @Repository
+@Primary
 public class TransactionDaoImpl implements TransactionDao {
 
 	@PersistenceContext

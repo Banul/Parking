@@ -8,12 +8,14 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaUpdate;
 import javax.persistence.criteria.Root;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 import com.touk.parking.dao.DriverDao;
 import com.touk.parking.model.DriverModelUpdateMeterState;
 import com.touk.parking.model.FullDriverModel;
 
 @Repository
+@Primary
 public class DriverDaoImpl implements DriverDao {
 
 	@PersistenceContext

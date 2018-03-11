@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import com.touk.parking.dao.DriverDao;
 import com.touk.parking.model.CostDriverModel;
@@ -18,6 +19,7 @@ import com.touk.parking.utils.CurrentDateReturner;
 import com.touk.parking.utils.DateConverter;
 
 @Service
+@Primary
 public class DriverServiceImpl implements DriverService {
 
 	private final String DATABASE_COLUMN_NAME_STOP_TIME = "meterLastTimeStop";
