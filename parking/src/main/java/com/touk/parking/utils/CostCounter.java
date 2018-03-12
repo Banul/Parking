@@ -15,7 +15,7 @@ public class CostCounter {
 	private final BigDecimal VIP_SECOND_HOUR_PRICE = new BigDecimal ("2");
 
 	public BigDecimal getCost(Date dateStart, LocalDateTime currentDate, boolean isVip, boolean isMeterActive) {
-		BigDecimal cost = new BigDecimal("0.00");
+		BigDecimal cost = BigDecimal.ZERO;
 		if (isMeterActive) {
 			int differance = countDifferanceBetweenDates(dateStart, currentDate);
 			cost = countCost(differance, isVip);
@@ -40,18 +40,18 @@ public class CostCounter {
 		
 		if (isVip == false) {
 			// sum of geometric series formula
-			costCounter = (BigDecimal.valueOf(1).subtract(REGULAR_PRICE_FACTOR.pow(differance)));
-			costDenominator =  BigDecimal.valueOf(1).subtract(REGULAR_PRICE_FACTOR);
+			costCounter = (BigDecimal.ONE.subtract(REGULAR_PRICE_FACTOR.pow(differance)));
+			costDenominator =  BigDecimal.ONE.subtract(REGULAR_PRICE_FACTOR);
 			cost = costCounter.divide(costDenominator);
 		}
 			
 		else if (differance > 1) {
-			costCounter = (BigDecimal.valueOf(1).subtract(VIP_PRICE_FACTOR.pow(differance-1)));
-			costDenominator = BigDecimal.valueOf(1).subtract(VIP_PRICE_FACTOR);
+			costCounter = (BigDecimal.ONE.subtract(VIP_PRICE_FACTOR.pow(differance-1)));
+			costDenominator = BigDecimal.ONE.subtract(VIP_PRICE_FACTOR);
 			cost = VIP_SECOND_HOUR_PRICE.multiply(costCounter.divide(costDenominator));
 		}
 		else
-			cost = BigDecimal.valueOf(0);
+			cost = BigDecimal.ZERO;
 
 		return cost;
 	}

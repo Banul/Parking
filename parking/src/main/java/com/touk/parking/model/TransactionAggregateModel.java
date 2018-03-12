@@ -31,7 +31,7 @@ public class TransactionAggregateModel {
 
 	@Column(name = "currency")
 	private Currency currency;
-	
+		
 	public String getDate() {
 		return date;
 	}

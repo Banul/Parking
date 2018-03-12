@@ -1,5 +1,7 @@
 package com.touk.parking.model;
 
+
+//MoneyModel, transactionAggModel, ten 3 model najdłuższy
 public class TransactionAggregateModelContainingMoneyModel {
 
 	public TransactionAggregateModelContainingMoneyModel(TransactionAggregateModel transactionAgg) {
@@ -13,5 +15,13 @@ public class TransactionAggregateModelContainingMoneyModel {
 	public String getDate() {
 		return date;
 	}
+
+	public MoneyModel getMoneyModel() {
+		return moneyModel;
+	}
+
+
+	
+	
 
 }

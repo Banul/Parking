@@ -16,7 +16,7 @@ public class TransactionAggregateDaoImpl implements TransactionAggregateDao {
 	@PersistenceContext
 	EntityManager em;
 
-	public TransactionAggregateModel getEarningsByDate(String date) throws NoResultException{
+	public TransactionAggregateModel getEarningsByDate(String date){
 		
 		TypedQuery<TransactionAggregateModel> query = em.createQuery("select t from TransactionAggregateModel t where t.date=:date", TransactionAggregateModel.class);
 		query.setParameter("date", date);
@@ -27,7 +27,7 @@ public class TransactionAggregateDaoImpl implements TransactionAggregateDao {
         }
         
         else {
-        	throw new NoResultException("No results for inserted date!");
+        	throw new NoResultException("No results for inserted date "+date);
         }
 		
 	}

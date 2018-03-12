@@ -21,23 +21,25 @@ public class DriverDaoImpl implements DriverDao {
 	@PersistenceContext
 	EntityManager em;
 
-	public FullDriverModel getDriverDataById(int id) throws NoResultException {
+	public FullDriverModel getDriverDataById(int id) {
 
+		
 		TypedQuery<FullDriverModel> query = em.createQuery("select d from FullDriverModel d where d.id=:id", FullDriverModel.class);
 		query.setParameter("id", id);
         query.setMaxResults(1);     
         FullDriverModel driver = query.getResultList().stream().findFirst().orElse(null); 
-        if (driver != null) {
-        	return driver;
-        }
         
-        else {
-        	throw new NoResultException("No results for inserted id!");
+        if (driver != null) {
+    		return driver;
         }
-		
+        else {
+        	throw new NoResultException("No results for inserted id " + id);
+        }
+
+        
 	}
 
-	public FullDriverModel getMeterTime(int pesel) throws NoResultException{
+	public FullDriverModel getMeterTime(int pesel) {
 
 		TypedQuery<FullDriverModel> query = em.createQuery("select d from FullDriverModel d where d.pesel=:pesel", FullDriverModel.class);
 		query.setParameter("pesel", pesel);
@@ -46,7 +48,7 @@ public class DriverDaoImpl implements DriverDao {
         	return driver;
         }
         else {
-        	throw new NoResultException("No results for inserted id!");
+        	throw new NoResultException("No results for inserted pesel " + pesel);
         }
 
 	}

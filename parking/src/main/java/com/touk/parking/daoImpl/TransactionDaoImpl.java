@@ -17,7 +17,7 @@ public class TransactionDaoImpl implements TransactionDao {
 	@PersistenceContext
 	EntityManager em;
 
-	public List<TransactionModel> getTransactionsByDate(String date) throws NoResultException{
+	public List<TransactionModel> getTransactionsByDate(String date){
 
 		TypedQuery<TransactionModel> query = em.createQuery("select t from TransactionModel t where t.date=:date", TransactionModel.class);
 		query.setParameter("date", date);
@@ -28,7 +28,7 @@ public class TransactionDaoImpl implements TransactionDao {
         }
         
         else {
-        	throw new NoResultException("No results for inserted date!");
+        	throw new NoResultException("No results for inserted date" + date);
         }
 		
 	}
