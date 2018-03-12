@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import com.touk.parking.dao.DriverDao;
@@ -24,7 +25,10 @@ public class DriverServiceImpl implements DriverService {
 
 	private final String DATABASE_COLUMN_NAME_STOP_TIME = "meterLastTimeStop";
 	private final String DATABASE_COLUMN_NAME_START_TIME = "meterLastTimeStart";
-	private DateConverter dateConverter = new DateConverter();
+
+	@Autowired
+	@Qualifier("dateConverter")
+	private DateConverter dateConverter;
 
 	@Autowired
 	DriverDao driverDao;
@@ -59,7 +63,7 @@ public class DriverServiceImpl implements DriverService {
 		BigDecimal cost = counter.getCost(meterStartDate, currentDate, isVip, isMeterActive);
 		MoneyModel moneyToPay = MoneyModel.pln(cost);
 		costDriverModel = new CostDriverModel(moneyToPay, isMeterActive);
-		
+
 		return costDriverModel;
 	}
 
