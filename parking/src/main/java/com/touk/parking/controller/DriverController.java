@@ -37,14 +37,14 @@ public class DriverController {
 	}
 
 	@CrossOrigin
-	@PutMapping(value = "update-driver-stop/{pesel}", consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PutMapping(value = "stop", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void updateDriverMeterStop(@RequestBody DriverModelUpdateMeterState driverUpdate) throws ParseException {
 
 		driverService.updateDriverDataStopMeter(driverUpdate);
 	}
 
 	@CrossOrigin
-	@PutMapping(value = "update-driver-start/{pesel}", consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PutMapping(value = "start", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void updateDriverMeterStart(@RequestBody DriverModelUpdateMeterState driverUpdate) throws ParseException {
 		driverService.updateDriverDataStartMeter(driverUpdate);
 	}
