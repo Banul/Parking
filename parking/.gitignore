@@ -1,0 +1,6 @@
+/target/
+pidFile.txt
+/settings/
+.classpath
+.project
+.settings
