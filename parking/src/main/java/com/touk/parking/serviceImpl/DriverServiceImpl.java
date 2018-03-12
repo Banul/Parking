@@ -25,7 +25,7 @@ public class DriverServiceImpl implements DriverService {
 
 	private final String DATABASE_COLUMN_NAME_STOP_TIME = "meterLastTimeStop";
 	private final String DATABASE_COLUMN_NAME_START_TIME = "meterLastTimeStart";
-
+	
 	@Autowired
 	@Qualifier("dateConverter")
 	private DateConverter dateConverter;
@@ -63,7 +63,7 @@ public class DriverServiceImpl implements DriverService {
 		BigDecimal cost = counter.getCost(meterStartDate, currentDate, isVip, isMeterActive);
 		MoneyModel moneyToPay = MoneyModel.pln(cost);
 		costDriverModel = new CostDriverModel(moneyToPay, isMeterActive);
-
+		
 		return costDriverModel;
 	}
 

@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Currency;
 
-// source: https://stackoverflow.com/questions/1359817/using-bigdecimal-to-work-with-currencies
 public class MoneyModel {
 	private static final Currency PLN = Currency.getInstance("PLN");
 	private static final RoundingMode DEFAULT_ROUNDING = RoundingMode.HALF_UP;
@@ -16,7 +15,10 @@ public class MoneyModel {
 		return new MoneyModel(amount, PLN);
 	}
 
-	MoneyModel (BigDecimal amount, Currency currency) {
+	public MoneyModel() {}
+
+	
+	public MoneyModel (BigDecimal amount, Currency currency) {
         this(amount, currency, DEFAULT_ROUNDING);
     }
 
@@ -26,7 +28,7 @@ public class MoneyModel {
         this.amount = amount.setScale(currency.getDefaultFractionDigits(), rounding);
     }
 
-    
+
 	public BigDecimal getAmount() {
 		return amount;
 	}
