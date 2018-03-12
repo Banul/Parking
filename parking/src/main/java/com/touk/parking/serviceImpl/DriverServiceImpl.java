@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
+import com.touk.parking.constans.ConstansHolder;
 import com.touk.parking.dao.DriverDao;
 import com.touk.parking.model.CostDriverModel;
 import com.touk.parking.model.DriverModelUpdateMeterState;
@@ -29,6 +30,10 @@ public class DriverServiceImpl implements DriverService {
 	@Autowired
 	@Qualifier("dateConverter")
 	private DateConverter dateConverter;
+	
+	@Autowired
+	@Qualifier("costCounter")
+	private CostCounter costCounter;
 
 	@Autowired
 	DriverDao driverDao;
@@ -53,16 +58,13 @@ public class DriverServiceImpl implements DriverService {
 	public CostDriverModel createModelForDriver(int pesel) throws ParseException {
 
 		FullDriverModel driverModel = driverDao.getMeterTime(pesel);
-		CostDriverModel costDriverModel;
-
 		boolean isMeterActive = driverModel.isMeterActive();
 		Date meterStartDate = dateConverter.convertDate(driverModel.getMeterLastTimeStart());
 		LocalDateTime currentDate = CurrentDateReturner.returnCurrentDate();
 		boolean isVip = driverModel.isVip();
-		CostCounter counter = new CostCounter();
-		BigDecimal cost = counter.getCost(meterStartDate, currentDate, isVip, isMeterActive);
-		MoneyModel moneyToPay = MoneyModel.pln(cost);
-		costDriverModel = new CostDriverModel(moneyToPay, isMeterActive);
+		BigDecimal cost = costCounter.getCost(meterStartDate, currentDate, isVip, isMeterActive);
+		MoneyModel moneyToPay = new MoneyModel (cost, ConstansHolder.PLN);
+		CostDriverModel costDriverModel = new CostDriverModel(moneyToPay, isMeterActive);
 		
 		return costDriverModel;
 	}

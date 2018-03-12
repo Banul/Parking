@@ -29,8 +29,6 @@ public class TransactionAggregateControllerTest {
 	@MockBean
 	private TransactionAggregateService service;
 	
-	
-
 	@Test
 	public void transactionAggregateTest_SearchingTransactionTotalIncomeByDate() throws Exception {
 		TransactionAggregateModelContainingMoneyModel testTransactionAgg = createAggregateModelForTest();

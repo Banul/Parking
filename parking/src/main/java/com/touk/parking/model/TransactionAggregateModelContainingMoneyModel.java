@@ -1,15 +1,14 @@
 package com.touk.parking.model;
 
 public class TransactionAggregateModelContainingMoneyModel {
-	
+
+	private String date;
+	private MoneyModel moneyModel;
 
 	public TransactionAggregateModelContainingMoneyModel(TransactionAggregateModel transactionAgg) {
 		this.date = transactionAgg.getDate();
 		this.moneyModel = new MoneyModel(transactionAgg.getTotalIncome(), transactionAgg.getCurrency());
 	}
-	
-	private String date;
-	private MoneyModel moneyModel;
 
 	public String getDate() {
 		return date;
@@ -18,9 +17,5 @@ public class TransactionAggregateModelContainingMoneyModel {
 	public MoneyModel getMoneyModel() {
 		return moneyModel;
 	}
-
-
-	
-	
 
 }
